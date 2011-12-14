@@ -15,6 +15,9 @@
 		353155F01497E1A400666DB6 /* LGAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 353155EF1497E1A400666DB6 /* LGAppDelegate.m */; };
 		353155F31497E1A400666DB6 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 353155F11497E1A400666DB6 /* MainStoryboard.storyboard */; };
 		353155F61497E1A400666DB6 /* LGViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 353155F51497E1A400666DB6 /* LGViewController.m */; };
+		353155FE1497E55E00666DB6 /* SessionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 353155FD1497E55E00666DB6 /* SessionsViewController.m */; };
+		353156011497F33700666DB6 /* SessionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 353156001497F33700666DB6 /* SessionViewController.m */; };
+		35315604149801F600666DB6 /* CategorySelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 35315603149801F600666DB6 /* CategorySelectionViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,15 +25,21 @@
 		353155DF1497E1A300666DB6 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		353155E11497E1A400666DB6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		353155E31497E1A400666DB6 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		353155E71497E1A400666DB6 /* Smackdown-Info.plist */ = {isa = PBXFileReference; path = "Smackdown-Info.plist"; sourceTree = "<group>"; };
+		353155E71497E1A400666DB6 /* Smackdown-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Smackdown-Info.plist"; sourceTree = "<group>"; };
 		353155E91497E1A400666DB6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		353155EB1497E1A400666DB6 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		353155ED1497E1A400666DB6 /* Smackdown-Prefix.pch */ = {isa = PBXFileReference; path = "Smackdown-Prefix.pch"; sourceTree = "<group>"; };
-		353155EE1497E1A400666DB6 /* LGAppDelegate.h */ = {isa = PBXFileReference; path = LGAppDelegate.h; sourceTree = "<group>"; };
+		353155ED1497E1A400666DB6 /* Smackdown-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Smackdown-Prefix.pch"; sourceTree = "<group>"; };
+		353155EE1497E1A400666DB6 /* LGAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LGAppDelegate.h; sourceTree = "<group>"; };
 		353155EF1497E1A400666DB6 /* LGAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LGAppDelegate.m; sourceTree = "<group>"; };
 		353155F21497E1A400666DB6 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
-		353155F41497E1A400666DB6 /* LGViewController.h */ = {isa = PBXFileReference; path = LGViewController.h; sourceTree = "<group>"; };
+		353155F41497E1A400666DB6 /* LGViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LGViewController.h; sourceTree = "<group>"; };
 		353155F51497E1A400666DB6 /* LGViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LGViewController.m; sourceTree = "<group>"; };
+		353155FC1497E55E00666DB6 /* SessionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SessionsViewController.h; sourceTree = "<group>"; };
+		353155FD1497E55E00666DB6 /* SessionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SessionsViewController.m; sourceTree = "<group>"; };
+		353155FF1497F33700666DB6 /* SessionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SessionViewController.h; sourceTree = "<group>"; };
+		353156001497F33700666DB6 /* SessionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SessionViewController.m; sourceTree = "<group>"; };
+		35315602149801F500666DB6 /* CategorySelectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategorySelectionViewController.h; sourceTree = "<group>"; };
+		35315603149801F600666DB6 /* CategorySelectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategorySelectionViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +92,12 @@
 				353155F41497E1A400666DB6 /* LGViewController.h */,
 				353155F51497E1A400666DB6 /* LGViewController.m */,
 				353155E61497E1A400666DB6 /* Supporting Files */,
+				353155FC1497E55E00666DB6 /* SessionsViewController.h */,
+				353155FD1497E55E00666DB6 /* SessionsViewController.m */,
+				353155FF1497F33700666DB6 /* SessionViewController.h */,
+				353156001497F33700666DB6 /* SessionViewController.m */,
+				35315602149801F500666DB6 /* CategorySelectionViewController.h */,
+				35315603149801F600666DB6 /* CategorySelectionViewController.m */,
 			);
 			path = Smackdown;
 			sourceTree = "<group>";
@@ -164,6 +179,9 @@
 				353155EC1497E1A400666DB6 /* main.m in Sources */,
 				353155F01497E1A400666DB6 /* LGAppDelegate.m in Sources */,
 				353155F61497E1A400666DB6 /* LGViewController.m in Sources */,
+				353155FE1497E55E00666DB6 /* SessionsViewController.m in Sources */,
+				353156011497F33700666DB6 /* SessionViewController.m in Sources */,
+				35315604149801F600666DB6 /* CategorySelectionViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
