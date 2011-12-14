@@ -12,6 +12,8 @@
 
 @property (nonatomic, retain) IBOutlet UILabel *titleView;
 @property (nonatomic, retain) IBOutlet UILabel *speakerNameView;
+@property (nonatomic, retain) IBOutlet UILabel *roomView;
+@property (nonatomic, retain) IBOutlet UILabel *categoryView;
 @property (nonatomic, retain) IBOutlet UITextView *abstractView;
 @property (nonatomic, retain) NSMutableDictionary *session;
 

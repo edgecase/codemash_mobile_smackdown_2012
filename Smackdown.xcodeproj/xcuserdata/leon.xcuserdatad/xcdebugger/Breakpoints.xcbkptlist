@@ -14,7 +14,7 @@
          endingColumnNumber = "2147483647"
          startingLineNumber = "106"
          endingLineNumber = "106"
-         landmarkName = "-tableView:cellForRowAtIndexPath:"
+         landmarkName = "-tableView:commitEditingStyle:forRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -28,7 +28,7 @@
          endingColumnNumber = "2147483647"
          startingLineNumber = "114"
          endingLineNumber = "114"
-         landmarkName = "-prepareForSegue:sender:"
+         landmarkName = "-tableView:titleForDeleteConfirmationButtonForRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -41,9 +41,7 @@
          startingColumnNumber = "2147483647"
          endingColumnNumber = "2147483647"
          startingLineNumber = "119"
-         endingLineNumber = "119"
-         landmarkName = "-prepareForSegue:sender:"
-         landmarkType = "5">
+         endingLineNumber = "119">
       </FileBreakpoint>
    </FileBreakpoints>
 </Bucket>

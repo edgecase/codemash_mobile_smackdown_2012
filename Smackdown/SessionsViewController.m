@@ -40,30 +40,6 @@
   [super viewDidLoad];
   
   [spinner startAnimating];
-  NSURL *sessionURL = [NSURL URLWithString:@"http://codemash.org/rest/sessions.json"];
-  NSURLRequest *req = [NSURLRequest requestWithURL:sessionURL cachePolicy:NSURLCacheStorageAllowed timeoutInterval:2];
-  [NSURLConnection sendAsynchronousRequest:req 
-                                     queue:[NSOperationQueue currentQueue]
-                         completionHandler:
-   ^(NSURLResponse *resp, NSData *data, NSError *err) {
-     if(err){
-       [[[UIAlertView alloc] initWithTitle:@"Oh noes!" 
-                                   message:[err description] 
-                                  delegate:nil 
-                         cancelButtonTitle:@"ok" 
-                         otherButtonTitles:nil]
-        show];
-     } else {
-       dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-         NSError *jsonErr = nil;
-         sessions = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&jsonErr];
-         dispatch_async(dispatch_get_main_queue(), ^{
-           if(!jsonErr) [self.tableView reloadData];
-           [spinner stopAnimating];
-         });
-       });
-     }
-  }];
 }
 
 
@@ -135,11 +111,7 @@
   NSMutableDictionary *session = [sessions objectAtIndex:indexPath.row];
 
   BOOL isAttending = [[session objectForKey:@"isAttending"] boolValue];
-  if(isAttending){
-    return @"don't attend";
-  } else {
-    return @"attend";
-  }
+  return (isAttending) ? @"don't attend" : @"attend";
 }
 
 @end

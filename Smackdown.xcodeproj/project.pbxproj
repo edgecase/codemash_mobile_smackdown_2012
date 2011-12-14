@@ -86,12 +86,12 @@
 		353155E51497E1A400666DB6 /* Smackdown */ = {
 			isa = PBXGroup;
 			children = (
+				353155E61497E1A400666DB6 /* Supporting Files */,
 				353155EE1497E1A400666DB6 /* LGAppDelegate.h */,
 				353155EF1497E1A400666DB6 /* LGAppDelegate.m */,
 				353155F11497E1A400666DB6 /* MainStoryboard.storyboard */,
 				353155F41497E1A400666DB6 /* LGViewController.h */,
 				353155F51497E1A400666DB6 /* LGViewController.m */,
-				353155E61497E1A400666DB6 /* Supporting Files */,
 				353155FC1497E55E00666DB6 /* SessionsViewController.h */,
 				353155FD1497E55E00666DB6 /* SessionsViewController.m */,
 				353155FF1497F33700666DB6 /* SessionViewController.h */,
@@ -293,6 +293,7 @@
 				353155FB1497E1A400666DB6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

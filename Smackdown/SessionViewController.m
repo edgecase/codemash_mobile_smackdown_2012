@@ -8,11 +8,29 @@
 
 #import "SessionViewController.h"
 
+@interface SessionViewController(Internal)
+- (void)resetDataViews;
+@end
+
 @implementation SessionViewController
 @synthesize session;
 @synthesize titleView;
 @synthesize speakerNameView;
 @synthesize abstractView;
+@synthesize roomView;
+@synthesize categoryView;
+
+- (void)resetDataViews{
+  if(session){
+    titleView.text = [session objectForKey:@"Title"];
+    speakerNameView.text = [session objectForKey:@"SpeakerName"];
+    abstractView.text = [session objectForKey:@"Abstract"];
+    categoryView.text = [session objectForKey:@"Technology"];
+    roomView.text = [session objectForKey:@"Room"];
+    
+    [self.view setNeedsDisplay];
+  }
+}
 
 - (void)didReceiveMemoryWarning
 {
@@ -40,11 +58,7 @@
 
 - (void)viewWillAppear:(BOOL)animated{
   [super viewWillAppear:animated];
-  if(session){
-    titleView.text = [session objectForKey:@"Title"];
-    speakerNameView.text = [session objectForKey:@"SpeakerName"];
-    abstractView.text = [session objectForKey:@"Abstract"];
-  }
+  [self resetDataViews];
 }
 
 - (void)viewDidUnload
@@ -56,10 +70,7 @@
 
 - (void)setSession:(NSMutableDictionary *)newSession{
   session = newSession;
-  titleView.text = [session objectForKey:@"Title"];
-  speakerNameView.text = [session objectForKey:@"SpeakerName"];
-  abstractView.text = [session objectForKey:@"Abstract"];
-  [self.view setNeedsDisplay];
+  [self resetDataViews];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
