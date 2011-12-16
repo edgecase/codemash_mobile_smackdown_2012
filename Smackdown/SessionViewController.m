@@ -7,6 +7,7 @@
 //
 
 #import "SessionViewController.h"
+#import "NotesViewController.h"
 
 @interface SessionViewController(Internal)
 - (void)resetDataViews;
@@ -73,10 +74,23 @@
   [self resetDataViews];
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    // Return YES for supported orientations
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation{
   return YES;
 }
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+  if([[segue identifier] isEqualToString:@"viewSessionNotes"]){
+    NotesViewController *nvc = (NotesViewController *)[segue destinationViewController];
+    nvc.session = session;
+  }
+}
+
+- (IBAction)tweetSessionComment:(id)sender{
+  if([TWTweetComposeViewController canSendTweet]){
+    TWTweetComposeViewController *tweetController = [[TWTweetComposeViewController alloc] init];      
+    [self presentModalViewController:tweetController animated:YES];
+  }
+}
+
 
 @end

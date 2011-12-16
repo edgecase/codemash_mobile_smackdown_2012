@@ -11,6 +11,11 @@
 @implementation CategorySelectionViewController
 @synthesize categories;
 
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation{
+  return YES;
+}
+
+
 - (void)setCategories:(NSArray *)newCats{
   categories = newCats;
   [self.tableView reloadData];

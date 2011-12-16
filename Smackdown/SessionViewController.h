@@ -17,4 +17,6 @@
 @property (nonatomic, retain) IBOutlet UITextView *abstractView;
 @property (nonatomic, retain) NSMutableDictionary *session;
 
+- (IBAction)tweetSessionComment:(id)sender;
+
 @end

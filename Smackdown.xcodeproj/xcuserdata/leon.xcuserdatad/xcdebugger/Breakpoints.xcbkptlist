@@ -9,11 +9,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "Smackdown/SessionsViewController.m"
-         timestampString = "345506706.979097"
+         timestampString = "345679572.150386"
          startingColumnNumber = "2147483647"
          endingColumnNumber = "2147483647"
-         startingLineNumber = "106"
-         endingLineNumber = "106"
+         startingLineNumber = "134"
+         endingLineNumber = "134"
          landmarkName = "-tableView:commitEditingStyle:forRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -23,11 +23,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "Smackdown/SessionsViewController.m"
-         timestampString = "345506861.546838"
+         timestampString = "345679572.150386"
          startingColumnNumber = "2147483647"
          endingColumnNumber = "2147483647"
-         startingLineNumber = "114"
-         endingLineNumber = "114"
+         startingLineNumber = "142"
+         endingLineNumber = "142"
          landmarkName = "-tableView:titleForDeleteConfirmationButtonForRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -37,11 +37,25 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "Smackdown/SessionsViewController.m"
-         timestampString = "345507003.031843"
+         timestampString = "345679572.150386"
          startingColumnNumber = "2147483647"
          endingColumnNumber = "2147483647"
-         startingLineNumber = "119"
-         endingLineNumber = "119">
+         startingLineNumber = "147"
+         endingLineNumber = "147">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "Smackdown/ComposeNoteViewController.m"
+         timestampString = "345672536.134244"
+         startingColumnNumber = "2147483647"
+         endingColumnNumber = "2147483647"
+         startingLineNumber = "104"
+         endingLineNumber = "104"
+         landmarkName = "@implementation ComposeNoteViewController"
+         landmarkType = "3">
       </FileBreakpoint>
    </FileBreakpoints>
 </Bucket>
