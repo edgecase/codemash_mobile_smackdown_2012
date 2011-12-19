@@ -23,11 +23,11 @@
 
 - (void)resetDataViews{
   if(session){
-    titleView.text = [session objectForKey:@"Title"];
-    speakerNameView.text = [session objectForKey:@"SpeakerName"];
-    abstractView.text = [session objectForKey:@"Abstract"];
-    categoryView.text = [session objectForKey:@"Technology"];
-    roomView.text = [session objectForKey:@"Room"];
+    titleView.text = session.title;
+    speakerNameView.text = session.speakerName;
+    abstractView.text = session.abstract;
+    categoryView.text = session.technology;
+    roomView.text = session.room;
     
     [self.view setNeedsDisplay];
   }
@@ -69,7 +69,7 @@
     // e.g. self.myOutlet = nil;
 }
 
-- (void)setSession:(NSMutableDictionary *)newSession{
+- (void)setSession:(Session *)newSession{
   session = newSession;
   [self resetDataViews];
 }

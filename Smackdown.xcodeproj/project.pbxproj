@@ -53,6 +53,18 @@
 		3536A011149B95B40005CA8B /* twitter.png in Resources */ = {isa = PBXBuildFile; fileRef = 35369FF1149B95B40005CA8B /* twitter.png */; };
 		3536A012149B95B40005CA8B /* twitter@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 35369FF2149B95B40005CA8B /* twitter@2x.png */; };
 		3536A014149B97970005CA8B /* sessions_tabbar.png in Resources */ = {isa = PBXBuildFile; fileRef = 3536A013149B97970005CA8B /* sessions_tabbar.png */; };
+		3536A017149B9DC70005CA8B /* MyAgendaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3536A016149B9DC70005CA8B /* MyAgendaViewController.m */; };
+		3536A021149BB0B50005CA8B /* CodeMashModels.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3536A01F149BB0B50005CA8B /* CodeMashModels.xcdatamodeld */; };
+		3536A02D149BC7FA0005CA8B /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3536A02C149BC7FA0005CA8B /* CoreData.framework */; };
+		3536A030149BCDA90005CA8B /* empty_agenda.png in Resources */ = {isa = PBXBuildFile; fileRef = 3536A02E149BCDA90005CA8B /* empty_agenda.png */; };
+		3536A031149BCDA90005CA8B /* empty_agenda@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3536A02F149BCDA90005CA8B /* empty_agenda@2x.png */; };
+		3536A037149BCFF90005CA8B /* Session+Internal.m in Sources */ = {isa = PBXBuildFile; fileRef = 3536A036149BCFF90005CA8B /* Session+Internal.m */; };
+		3536A04B149BD83D0005CA8B /* Agenda.m in Sources */ = {isa = PBXBuildFile; fileRef = 3536A04A149BD83D0005CA8B /* Agenda.m */; };
+		3536A04E149BD83E0005CA8B /* Note.m in Sources */ = {isa = PBXBuildFile; fileRef = 3536A04D149BD83E0005CA8B /* Note.m */; };
+		3536A051149BD83E0005CA8B /* Session.m in Sources */ = {isa = PBXBuildFile; fileRef = 3536A050149BD83E0005CA8B /* Session.m */; };
+		3536A054149BD83F0005CA8B /* Speaker.m in Sources */ = {isa = PBXBuildFile; fileRef = 3536A053149BD83F0005CA8B /* Speaker.m */; };
+		3536A057149BDC9B0005CA8B /* Agenda+Agenda_Internal_.m in Sources */ = {isa = PBXBuildFile; fileRef = 3536A056149BDC9B0005CA8B /* Agenda+Agenda_Internal_.m */; };
+		3536A05A149BE77E0005CA8B /* Note+Note_Internal_.m in Sources */ = {isa = PBXBuildFile; fileRef = 3536A059149BE77E0005CA8B /* Note+Note_Internal_.m */; };
 		3543F927149904C700E89640 /* NotesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3543F926149904C700E89640 /* NotesViewController.m */; };
 		3543F92B149907CA00E89640 /* NoteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3543F92A149907CA00E89640 /* NoteViewController.m */; };
 		3543F92E149907DC00E89640 /* ComposeNoteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3543F92D149907DC00E89640 /* ComposeNoteViewController.m */; };
@@ -118,6 +130,26 @@
 		35369FF1149B95B40005CA8B /* twitter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = twitter.png; sourceTree = "<group>"; };
 		35369FF2149B95B40005CA8B /* twitter@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "twitter@2x.png"; sourceTree = "<group>"; };
 		3536A013149B97970005CA8B /* sessions_tabbar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sessions_tabbar.png; sourceTree = "<group>"; };
+		3536A015149B9DC70005CA8B /* MyAgendaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyAgendaViewController.h; sourceTree = "<group>"; };
+		3536A016149B9DC70005CA8B /* MyAgendaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyAgendaViewController.m; sourceTree = "<group>"; };
+		3536A020149BB0B50005CA8B /* CodeMashModels.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CodeMashModels.xcdatamodel; sourceTree = "<group>"; };
+		3536A02C149BC7FA0005CA8B /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		3536A02E149BCDA90005CA8B /* empty_agenda.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = empty_agenda.png; sourceTree = "<group>"; };
+		3536A02F149BCDA90005CA8B /* empty_agenda@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "empty_agenda@2x.png"; sourceTree = "<group>"; };
+		3536A035149BCFF90005CA8B /* Session+Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Session+Internal.h"; sourceTree = "<group>"; };
+		3536A036149BCFF90005CA8B /* Session+Internal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Session+Internal.m"; sourceTree = "<group>"; };
+		3536A049149BD83D0005CA8B /* Agenda.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Agenda.h; sourceTree = "<group>"; };
+		3536A04A149BD83D0005CA8B /* Agenda.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Agenda.m; sourceTree = "<group>"; };
+		3536A04C149BD83E0005CA8B /* Note.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Note.h; sourceTree = "<group>"; };
+		3536A04D149BD83E0005CA8B /* Note.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Note.m; sourceTree = "<group>"; };
+		3536A04F149BD83E0005CA8B /* Session.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Session.h; sourceTree = "<group>"; };
+		3536A050149BD83E0005CA8B /* Session.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Session.m; sourceTree = "<group>"; };
+		3536A052149BD83F0005CA8B /* Speaker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Speaker.h; sourceTree = "<group>"; };
+		3536A053149BD83F0005CA8B /* Speaker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Speaker.m; sourceTree = "<group>"; };
+		3536A055149BDC9B0005CA8B /* Agenda+Agenda_Internal_.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Agenda+Agenda_Internal_.h"; sourceTree = "<group>"; };
+		3536A056149BDC9B0005CA8B /* Agenda+Agenda_Internal_.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Agenda+Agenda_Internal_.m"; sourceTree = "<group>"; };
+		3536A058149BE77E0005CA8B /* Note+Note_Internal_.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Note+Note_Internal_.h"; sourceTree = "<group>"; };
+		3536A059149BE77E0005CA8B /* Note+Note_Internal_.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Note+Note_Internal_.m"; sourceTree = "<group>"; };
 		3543F925149904C700E89640 /* NotesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotesViewController.h; sourceTree = "<group>"; };
 		3543F926149904C700E89640 /* NotesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotesViewController.m; sourceTree = "<group>"; };
 		3543F929149907CA00E89640 /* NoteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoteViewController.h; sourceTree = "<group>"; };
@@ -134,6 +166,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3536A02D149BC7FA0005CA8B /* CoreData.framework in Frameworks */,
 				35369F8A149A96A80005CA8B /* Twitter.framework in Frameworks */,
 				35AE47EB149A772300AAD74A /* MobileCoreServices.framework in Frameworks */,
 				3543F93214990BD600E89640 /* QuartzCore.framework in Frameworks */,
@@ -167,6 +200,7 @@
 		353155DE1497E1A300666DB6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3536A02C149BC7FA0005CA8B /* CoreData.framework */,
 				35369F89149A96A80005CA8B /* Twitter.framework */,
 				35AE47EA149A772300AAD74A /* MobileCoreServices.framework */,
 				3543F93114990BD600E89640 /* QuartzCore.framework */,
@@ -181,7 +215,8 @@
 		353155E51497E1A400666DB6 /* Smackdown */ = {
 			isa = PBXGroup;
 			children = (
-				35369F8F149AA1100005CA8B /* assets */,
+				3536A025149BB1680005CA8B /* Models */,
+				35369F8F149AA1100005CA8B /* Assets */,
 				353155E61497E1A400666DB6 /* Supporting Files */,
 				353155F11497E1A400666DB6 /* MainStoryboard.storyboard */,
 				353155EE1497E1A400666DB6 /* LGAppDelegate.h */,
@@ -204,6 +239,8 @@
 				35369F8D149A9A5D0005CA8B /* HashTagViewController.m */,
 				35369FD0149AA7280005CA8B /* PrecompilerViewController.h */,
 				35369FD1149AA7280005CA8B /* PrecompilerViewController.m */,
+				3536A015149B9DC70005CA8B /* MyAgendaViewController.h */,
+				3536A016149B9DC70005CA8B /* MyAgendaViewController.m */,
 			);
 			path = Smackdown;
 			sourceTree = "<group>";
@@ -219,9 +256,11 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		35369F8F149AA1100005CA8B /* assets */ = {
+		35369F8F149AA1100005CA8B /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				3536A02E149BCDA90005CA8B /* empty_agenda.png */,
+				3536A02F149BCDA90005CA8B /* empty_agenda@2x.png */,
 				35369FD3149B95B40005CA8B /* advanced.png */,
 				35369FD4149B95B40005CA8B /* advanced@2x.png */,
 				35369FD5149B95B40005CA8B /* agenda_tabbar.png */,
@@ -255,7 +294,29 @@
 				35369FF1149B95B40005CA8B /* twitter.png */,
 				35369FF2149B95B40005CA8B /* twitter@2x.png */,
 			);
-			name = assets;
+			name = Assets;
+			sourceTree = "<group>";
+		};
+		3536A025149BB1680005CA8B /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				3536A01F149BB0B50005CA8B /* CodeMashModels.xcdatamodeld */,
+				3536A052149BD83F0005CA8B /* Speaker.h */,
+				3536A053149BD83F0005CA8B /* Speaker.m */,
+				3536A04F149BD83E0005CA8B /* Session.h */,
+				3536A050149BD83E0005CA8B /* Session.m */,
+				3536A04C149BD83E0005CA8B /* Note.h */,
+				3536A04D149BD83E0005CA8B /* Note.m */,
+				3536A049149BD83D0005CA8B /* Agenda.h */,
+				3536A04A149BD83D0005CA8B /* Agenda.m */,
+				3536A035149BCFF90005CA8B /* Session+Internal.h */,
+				3536A036149BCFF90005CA8B /* Session+Internal.m */,
+				3536A055149BDC9B0005CA8B /* Agenda+Agenda_Internal_.h */,
+				3536A056149BDC9B0005CA8B /* Agenda+Agenda_Internal_.m */,
+				3536A058149BE77E0005CA8B /* Note+Note_Internal_.h */,
+				3536A059149BE77E0005CA8B /* Note+Note_Internal_.m */,
+			);
+			name = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -343,6 +404,8 @@
 				3536A011149B95B40005CA8B /* twitter.png in Resources */,
 				3536A012149B95B40005CA8B /* twitter@2x.png in Resources */,
 				3536A014149B97970005CA8B /* sessions_tabbar.png in Resources */,
+				3536A030149BCDA90005CA8B /* empty_agenda.png in Resources */,
+				3536A031149BCDA90005CA8B /* empty_agenda@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -364,6 +427,15 @@
 				3543F92E149907DC00E89640 /* ComposeNoteViewController.m in Sources */,
 				35369F8E149A9A5D0005CA8B /* HashTagViewController.m in Sources */,
 				35369FD2149AA7280005CA8B /* PrecompilerViewController.m in Sources */,
+				3536A017149B9DC70005CA8B /* MyAgendaViewController.m in Sources */,
+				3536A021149BB0B50005CA8B /* CodeMashModels.xcdatamodeld in Sources */,
+				3536A037149BCFF90005CA8B /* Session+Internal.m in Sources */,
+				3536A04B149BD83D0005CA8B /* Agenda.m in Sources */,
+				3536A04E149BD83E0005CA8B /* Note.m in Sources */,
+				3536A051149BD83E0005CA8B /* Session.m in Sources */,
+				3536A054149BD83F0005CA8B /* Speaker.m in Sources */,
+				3536A057149BDC9B0005CA8B /* Agenda+Agenda_Internal_.m in Sources */,
+				3536A05A149BE77E0005CA8B /* Note+Note_Internal_.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -478,6 +550,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		3536A01F149BB0B50005CA8B /* CodeMashModels.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				3536A020149BB0B50005CA8B /* CodeMashModels.xcdatamodel */,
+			);
+			currentVersion = 3536A020149BB0B50005CA8B /* CodeMashModels.xcdatamodel */;
+			path = CodeMashModels.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 353155D21497E1A300666DB6 /* Project object */;
 }

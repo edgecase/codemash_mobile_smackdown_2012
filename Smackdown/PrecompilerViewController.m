@@ -38,19 +38,13 @@
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad{
   [super viewDidLoad];
-  sessionsPath = @"/tmp/sessionData";
   [self loadSessions];
 }
 
 - (void)loadSessions{
+  return;
   if(!sessions){
-    NSArray *tempSessions = [NSArray arrayWithContentsOfFile:sessionsPath];
-    
-    if(tempSessions){ 
-      sessions = tempSessions;
-      return;
-    }
-    
+  
     [spinner startAnimating];
     NSURL *sessionURL = [NSURL URLWithString:@"http://codemash.org/rest/precompiler.json"];
     NSURLRequest *req = [NSURLRequest requestWithURL:sessionURL cachePolicy:NSURLCacheStorageAllowed timeoutInterval:2];
@@ -95,13 +89,13 @@
     cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"sessionCell"];
   }
   
-  NSMutableDictionary *session = [sessions objectAtIndex:indexPath.row];
+  Session *session = [sessions objectAtIndex:indexPath.row];
   
-  [[cell viewWithTag:TITLE_TAG] setValue:[session objectForKey:@"Title"] forKeyPath:@"text"];
-  [[cell viewWithTag:SPEAKER_TAG] setValue:[session objectForKey:@"SpeakerName"] forKeyPath:@"text"];
-  [[cell viewWithTag:CATEGORY_TAG] setValue:[session objectForKey:@"Technology"] forKeyPath:@"text"];
+  [[cell viewWithTag:TITLE_TAG] setValue:session.title forKeyPath:@"text"];
+  [[cell viewWithTag:SPEAKER_TAG] setValue:session.speakerName forKeyPath:@"text"];
+  [[cell viewWithTag:CATEGORY_TAG] setValue:session.technology forKeyPath:@"text"];
   
-  if([[session objectForKey:@"isAttending"] boolValue]){
+  if([Agenda isAttendingSession:session]){
     [cell setAccessoryType:UITableViewCellAccessoryCheckmark];
   } else {
     [cell setAccessoryType:UITableViewCellAccessoryNone];
@@ -123,17 +117,21 @@
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
   if (editingStyle == UITableViewCellEditingStyleDelete){
-    NSMutableDictionary *session = [sessions objectAtIndex:indexPath.row];
-    BOOL isAttending = [[session objectForKey:@"isAttending"] boolValue];
-    [session setObject:[NSNumber numberWithBool:!isAttending] forKey:@"isAttending"];
+    Session *session = [sessions objectAtIndex:indexPath.row];
+    BOOL isAttending = [Agenda isAttendingSession:session];
+    if(isAttending){
+      [[Agenda sharedAgenda] removeSessionsObject:session];
+    } else {
+      [[Agenda sharedAgenda] addSessionsObject:session];
+    }
     [tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
   }
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath{
-  NSMutableDictionary *session = [sessions objectAtIndex:indexPath.row];
+  Session *session = [sessions objectAtIndex:indexPath.row];
   
-  BOOL isAttending = [[session objectForKey:@"isAttending"] boolValue];
+  BOOL isAttending = [Agenda isAttendingSession:session];
   return (isAttending) ? @"don't attend" : @"attend";
 }
 

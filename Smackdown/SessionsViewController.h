@@ -11,7 +11,7 @@
 @interface SessionsViewController : UITableViewController{
   NSArray *sessions;
   IBOutlet UIActivityIndicatorView *spinner;
-  NSString *sessionsPath;
+  Agenda *agenda;
 }
 
 - (void)loadSessions;

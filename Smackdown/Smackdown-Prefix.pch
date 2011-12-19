@@ -11,5 +11,15 @@
 #ifdef __OBJC__
   #import <UIKit/UIKit.h>
   #import <Foundation/Foundation.h>
+#import <CoreData/CoreData.h>
 #import <Twitter/Twitter.h>
+#import "LGAppDelegate.h"
+#import "Agenda.h"
+#import "Session.h"
+#import "Speaker.h"
+#import "Note.h"
+#import "Session+Internal.h"
+#import "Agenda+Agenda_Internal_.h"
+#import "Note+Note_Internal_.h"
+
 #endif

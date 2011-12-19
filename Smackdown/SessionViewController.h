@@ -15,7 +15,7 @@
 @property (nonatomic, retain) IBOutlet UILabel *roomView;
 @property (nonatomic, retain) IBOutlet UILabel *categoryView;
 @property (nonatomic, retain) IBOutlet UITextView *abstractView;
-@property (nonatomic, retain) NSMutableDictionary *session;
+@property (nonatomic, retain) Session *session;
 
 - (IBAction)tweetSessionComment:(id)sender;
 

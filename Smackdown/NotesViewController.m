@@ -70,7 +70,8 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     // Return the number of rows in the section.
-  return (session) ? [[session objectForKey:@"notes"] count] : [[[sessions objectAtIndex:section] objectForKey:@"notes"] count];
+    //return (session) ? [[session objectForKey:@"notes"] count] : [[[sessions objectAtIndex:section] objectForKey:@"notes"] count];
+  return 0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -144,7 +145,7 @@
   if(sessions){
     return [[[sessions objectAtIndex:indexPath.section] objectForKey:@"notes"] objectAtIndex:indexPath.row];
   } else {
-    return [[session objectForKey:@"notes"] objectAtIndex:indexPath.row];
+    return [session.notes objectAtIndex:indexPath.row];
   }
 }
 

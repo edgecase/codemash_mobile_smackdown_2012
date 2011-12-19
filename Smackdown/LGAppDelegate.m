@@ -11,11 +11,57 @@
 @implementation LGAppDelegate
 
 @synthesize window = _window;
+@synthesize managedObjectModel;
+@synthesize managedObjectContext;
+@synthesize persistentStoreCoordinator;
+
+- (NSManagedObjectModel *)managedObjectModel {
+  
+  if (managedObjectModel != nil) return managedObjectModel;
+  
+  managedObjectModel = [NSManagedObjectModel mergedModelFromBundles:nil];
+  
+  return managedObjectModel;
+}
+
+- (NSManagedObjectContext *)managedObjectContext{
+  if (managedObjectContext != nil) {
+    return managedObjectContext;
+  }
+  
+  NSPersistentStoreCoordinator *coordinator = [self persistentStoreCoordinator];
+  if (coordinator != nil) {
+    managedObjectContext = [[NSManagedObjectContext alloc] init];
+    [managedObjectContext setPersistentStoreCoordinator: coordinator];
+  }
+  return managedObjectContext;
+}
+
+- (NSPersistentStoreCoordinator *)persistentStoreCoordinator {
+  
+  if (persistentStoreCoordinator != nil) return persistentStoreCoordinator;
+  
+  
+  NSString *storePath = [[self applicationDocumentsDirectory] stringByAppendingPathComponent: @"smackdown.sqlite"];
+  NSURL *storeUrl = [NSURL fileURLWithPath:storePath];
+  
+  NSDictionary *options = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:YES], NSMigratePersistentStoresAutomaticallyOption, [NSNumber numberWithBool:YES], NSInferMappingModelAutomaticallyOption, nil];    
+  persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel: [self managedObjectModel]];
+  
+  NSError *error;
+  if (![persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeUrl options:options error:&error]) {
+    NSLog(@"COREDATA FAILZORZ!!! Unresolved error %@, %@", error, [error userInfo]);
+    exit(-1);
+  }    
+  
+  return persistentStoreCoordinator;
+}
+
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
-    return YES;
+
+  return YES;
 }
 							
 - (void)applicationWillResignActive:(UIApplication *)application
@@ -32,6 +78,15 @@
    Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
    If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
    */
+  
+  NSError *error;
+  if (managedObjectContext != nil) {
+    if ([managedObjectContext hasChanges] && ![managedObjectContext save:&error]) {
+      // Update to handle the error appropriately.
+      NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+      exit(-1);  // Fail
+    } 
+  }
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
@@ -55,6 +110,25 @@
    Save data if appropriate.
    See also applicationDidEnterBackground:.
    */
+}
+
+- (NSString *)applicationDocumentsDirectory{
+  NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+  NSString *basePath = ([paths count] > 0) ? [paths objectAtIndex:0] : nil;
+  return basePath;
+}
+
+- (IBAction)saveContext:(id)sender{
+  NSError *error;
+  if (![[self managedObjectContext] save:&error]) {
+    // Update to handle the error appropriately.
+    NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+    exit(-1);  // Fail
+  }
+}
+
++ (LGAppDelegate *)sharedAppDelegate{
+  return (LGAppDelegate *)[[UIApplication sharedApplication] delegate];
 }
 
 @end

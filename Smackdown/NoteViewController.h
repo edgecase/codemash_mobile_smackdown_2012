@@ -15,6 +15,6 @@
 }
 
 @property (nonatomic, retain) NSMutableDictionary *note;
-@property (nonatomic, retain) NSMutableDictionary *session;
+@property (nonatomic, retain) Session *session;
 
 @end

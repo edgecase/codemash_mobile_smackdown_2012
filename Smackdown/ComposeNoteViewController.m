@@ -109,19 +109,17 @@
 }
 
 - (IBAction)save:(id)sender{
-  NSMutableDictionary *newNote = [NSMutableDictionary dictionaryWithCapacity:3];
   
-  [newNote setObject:[NSDate date] forKey:@"create_at"];
-  if([[textView text] length] > 2)
-    [newNote setObject:[textView text] forKey:@"body"];
+  Note *newNote = [Note createNote];
   
-  if(images && [images count] > 0)
-    [newNote setObject:images forKey:@"images"];
+  newNote.created_at = [NSDate date];
   
-  NSMutableArray *notes = [session objectForKey:@"notes"];
-  if(!notes) notes = [NSMutableArray arrayWithCapacity:1];
-  [notes addObject:newNote];
+  if([[textView text] length] > 2) newNote.body = [textView text];
   
+  // TODO: allow for multiple images per note.
+  if(images && [images count] > 0) newNote.image = [images objectAtIndex:0];
+  
+  [session addNotesObject:newNote];
   if (delegate && [delegate respondsToSelector:@selector(userCreatedNote:sender:)]) {
     [delegate userCreatedNote:newNote sender:self];
   }

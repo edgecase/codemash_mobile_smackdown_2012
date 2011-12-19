@@ -11,7 +11,7 @@
 @protocol ComposeNoteDelegate <NSObject>
 @optional
 - (void)userDidCancel:(id)sender;
-- (void)userCreatedNote:(NSMutableDictionary *)newNote sender:(id)sender;
+- (void)userCreatedNote:(Note *)newNote sender:(id)sender;
 
 @end
 
@@ -21,7 +21,7 @@
   NSMutableArray *images;
 }
 
-@property (nonatomic, retain) NSMutableDictionary *session;
+@property (nonatomic, retain) Session *session;
 @property (nonatomic, retain) id<ComposeNoteDelegate> delegate;
 
 - (IBAction)takePicture:(id)sender;

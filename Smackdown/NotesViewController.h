@@ -13,7 +13,7 @@
 @interface NotesViewController : UITableViewController<ComposeNoteDelegate> 
 
 @property (nonatomic, retain) NSArray *sessions;
-@property (nonatomic, retain) NSMutableDictionary *session;
+@property (nonatomic, retain) Session *session;
 
 - (NSMutableDictionary *)noteAtIndexPath:(NSIndexPath *)indexPath;
 
