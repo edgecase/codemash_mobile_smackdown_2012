@@ -23,11 +23,11 @@
 
 - (void)resetDataViews{
   if(session){
-    titleView.text = session.title;
-    speakerNameView.text = session.speakerName;
-    abstractView.text = session.abstract;
-    categoryView.text = session.technology;
-    roomView.text = session.room;
+    titleView.text = [session valueForKeyPath:@"properties.Title"];
+    speakerNameView.text = [session valueForKeyPath:@"properties.SpeakerName"];
+    abstractView.text = [session valueForKeyPath:@"properties.Abstract"];
+    categoryView.text = [session valueForKeyPath:@"properties.Technology"];
+    roomView.text = [session valueForKeyPath:@"properties.Room"];
     
     [self.view setNeedsDisplay];
   }

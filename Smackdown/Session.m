@@ -14,16 +14,7 @@
 
 @implementation Session
 
-@dynamic abstract;
-@dynamic difficulty;
-@dynamic lookup;
-@dynamic room;
-@dynamic speakerName;
-@dynamic speakerURI;
-@dynamic start;
-@dynamic technology;
-@dynamic title;
-@dynamic uri;
+@dynamic isPrecompiler;
 @dynamic agenda;
 @dynamic notes;
 @dynamic speaker;

@@ -11,15 +11,8 @@
 
 @class Session;
 
-@interface Speaker : NSManagedObject
+@interface Speaker : ExpandoObject
 
-@property (nonatomic, retain) NSString * biography;
-@property (nonatomic, retain) NSString * contactInfo;
-@property (nonatomic, retain) NSString * name;
-@property (nonatomic, retain) NSString * speakerLookup;
-@property (nonatomic, retain) NSString * speakerURI;
-@property (nonatomic, retain) NSString * twitterHandle;
-@property (nonatomic, retain) NSString * blogURL;
 @property (nonatomic, retain) NSOrderedSet *sessions;
 @end
 

@@ -7,6 +7,7 @@
 //
 
 #import "MyAgendaViewController.h"
+#import "SessionsTableViewCell.h"
 
 @interface MyAgendaViewController(Internal)
 -(BOOL)hasAgenda;
@@ -51,7 +52,8 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    [super viewWillAppear:animated];
+  [super viewWillAppear:animated];
+  myAgenda = [[[Agenda sharedAgenda] sessions] array];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -85,20 +87,19 @@
 {
   static NSString *CellIdentifier = @"agendaCell";
   
-  UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+  SessionsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
   if (cell == nil) {
-      cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
+      cell = (SessionsTableViewCell *)[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
   }
 
   if(![self hasAgenda]){
-    cell.textLabel.text = @"No Sessions selected.";
-    cell.detailTextLabel.text = @"go to the sessions tab and swipe to select";
-    cell.accessoryType = UITableViewCellAccessoryNone;
+    cell.titleView.text = @"No Sessions selected.";
+    cell.detailView.text = @"go to the sessions tab and swipe to select";
   } else {
-    NSMutableDictionary *item = [myAgenda objectAtIndex:indexPath.row];
-    cell.textLabel.text = [item objectForKey:@"Title"];
-    cell.detailTextLabel.text = [item objectForKey:@"Room"];
-    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    Session *session = [myAgenda objectAtIndex:indexPath.row];
+    cell.titleView.text = [session valueForKeyPath:@"properties.Title"];
+    cell.detailView.text = [session valueForKeyPath:@"properties.Room"];
+    cell.difficultyView.image = [UIImage imageNamed:[[session valueForKeyPath:@"properties.Difficulty"] lowercaseString]];
   }
 
   return cell;
@@ -114,8 +115,10 @@
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
       [tableView beginUpdates];
-      //id session = [myAgenda objectAtIndex:indexPath.row];
-      //[[Agenda agenda] removeSession:session];
+      Session *session = [myAgenda objectAtIndex:indexPath.row];
+
+      [[Agenda sharedAgenda] doNotAttendSession:session];
+      myAgenda = [[[Agenda sharedAgenda] sessions] array];
       [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
       [tableView endUpdates];
     }   

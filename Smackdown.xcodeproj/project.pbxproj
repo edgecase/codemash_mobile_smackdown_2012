@@ -20,7 +20,6 @@
 		35315604149801F600666DB6 /* CategorySelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 35315603149801F600666DB6 /* CategorySelectionViewController.m */; };
 		35369F8A149A96A80005CA8B /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35369F89149A96A80005CA8B /* Twitter.framework */; };
 		35369F8E149A9A5D0005CA8B /* HashTagViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 35369F8D149A9A5D0005CA8B /* HashTagViewController.m */; };
-		35369FD2149AA7280005CA8B /* PrecompilerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 35369FD1149AA7280005CA8B /* PrecompilerViewController.m */; };
 		35369FF3149B95B40005CA8B /* advanced.png in Resources */ = {isa = PBXBuildFile; fileRef = 35369FD3149B95B40005CA8B /* advanced.png */; };
 		35369FF4149B95B40005CA8B /* advanced@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 35369FD4149B95B40005CA8B /* advanced@2x.png */; };
 		35369FF5149B95B40005CA8B /* agenda_tabbar.png in Resources */ = {isa = PBXBuildFile; fileRef = 35369FD5149B95B40005CA8B /* agenda_tabbar.png */; };
@@ -58,19 +57,20 @@
 		3536A02D149BC7FA0005CA8B /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3536A02C149BC7FA0005CA8B /* CoreData.framework */; };
 		3536A030149BCDA90005CA8B /* empty_agenda.png in Resources */ = {isa = PBXBuildFile; fileRef = 3536A02E149BCDA90005CA8B /* empty_agenda.png */; };
 		3536A031149BCDA90005CA8B /* empty_agenda@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3536A02F149BCDA90005CA8B /* empty_agenda@2x.png */; };
-		3536A037149BCFF90005CA8B /* Session+Internal.m in Sources */ = {isa = PBXBuildFile; fileRef = 3536A036149BCFF90005CA8B /* Session+Internal.m */; };
 		3536A04B149BD83D0005CA8B /* Agenda.m in Sources */ = {isa = PBXBuildFile; fileRef = 3536A04A149BD83D0005CA8B /* Agenda.m */; };
 		3536A04E149BD83E0005CA8B /* Note.m in Sources */ = {isa = PBXBuildFile; fileRef = 3536A04D149BD83E0005CA8B /* Note.m */; };
 		3536A051149BD83E0005CA8B /* Session.m in Sources */ = {isa = PBXBuildFile; fileRef = 3536A050149BD83E0005CA8B /* Session.m */; };
 		3536A054149BD83F0005CA8B /* Speaker.m in Sources */ = {isa = PBXBuildFile; fileRef = 3536A053149BD83F0005CA8B /* Speaker.m */; };
-		3536A057149BDC9B0005CA8B /* Agenda+Agenda_Internal_.m in Sources */ = {isa = PBXBuildFile; fileRef = 3536A056149BDC9B0005CA8B /* Agenda+Agenda_Internal_.m */; };
-		3536A05A149BE77E0005CA8B /* Note+Note_Internal_.m in Sources */ = {isa = PBXBuildFile; fileRef = 3536A059149BE77E0005CA8B /* Note+Note_Internal_.m */; };
+		3536A061149F9E110005CA8B /* ExpandoObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 3536A060149F9E110005CA8B /* ExpandoObject.m */; };
+		3536A065149FB1680005CA8B /* Agenda+Agenda_Internal_.m in Sources */ = {isa = PBXBuildFile; fileRef = 3536A064149FB1680005CA8B /* Agenda+Agenda_Internal_.m */; };
+		3536A068149FB2340005CA8B /* Note+Note_Internal_.m in Sources */ = {isa = PBXBuildFile; fileRef = 3536A067149FB2330005CA8B /* Note+Note_Internal_.m */; };
 		3543F927149904C700E89640 /* NotesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3543F926149904C700E89640 /* NotesViewController.m */; };
 		3543F92B149907CA00E89640 /* NoteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3543F92A149907CA00E89640 /* NoteViewController.m */; };
 		3543F92E149907DC00E89640 /* ComposeNoteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3543F92D149907DC00E89640 /* ComposeNoteViewController.m */; };
 		3543F93014990BCC00E89640 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3543F92F14990BCB00E89640 /* AssetsLibrary.framework */; };
 		3543F93214990BD600E89640 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3543F93114990BD600E89640 /* QuartzCore.framework */; };
 		35AE47EB149A772300AAD74A /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35AE47EA149A772300AAD74A /* MobileCoreServices.framework */; };
+		35F8BB8C149FD7CC00C01F4D /* SessionsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 35F8BB8B149FD7CC00C01F4D /* SessionsTableViewCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -96,8 +96,6 @@
 		35369F89149A96A80005CA8B /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
 		35369F8C149A9A5D0005CA8B /* HashTagViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HashTagViewController.h; sourceTree = "<group>"; };
 		35369F8D149A9A5D0005CA8B /* HashTagViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HashTagViewController.m; sourceTree = "<group>"; };
-		35369FD0149AA7280005CA8B /* PrecompilerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrecompilerViewController.h; sourceTree = "<group>"; };
-		35369FD1149AA7280005CA8B /* PrecompilerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrecompilerViewController.m; sourceTree = "<group>"; };
 		35369FD3149B95B40005CA8B /* advanced.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = advanced.png; sourceTree = "<group>"; };
 		35369FD4149B95B40005CA8B /* advanced@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "advanced@2x.png"; sourceTree = "<group>"; };
 		35369FD5149B95B40005CA8B /* agenda_tabbar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = agenda_tabbar.png; sourceTree = "<group>"; };
@@ -136,8 +134,6 @@
 		3536A02C149BC7FA0005CA8B /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		3536A02E149BCDA90005CA8B /* empty_agenda.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = empty_agenda.png; sourceTree = "<group>"; };
 		3536A02F149BCDA90005CA8B /* empty_agenda@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "empty_agenda@2x.png"; sourceTree = "<group>"; };
-		3536A035149BCFF90005CA8B /* Session+Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Session+Internal.h"; sourceTree = "<group>"; };
-		3536A036149BCFF90005CA8B /* Session+Internal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Session+Internal.m"; sourceTree = "<group>"; };
 		3536A049149BD83D0005CA8B /* Agenda.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Agenda.h; sourceTree = "<group>"; };
 		3536A04A149BD83D0005CA8B /* Agenda.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Agenda.m; sourceTree = "<group>"; };
 		3536A04C149BD83E0005CA8B /* Note.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Note.h; sourceTree = "<group>"; };
@@ -146,10 +142,12 @@
 		3536A050149BD83E0005CA8B /* Session.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Session.m; sourceTree = "<group>"; };
 		3536A052149BD83F0005CA8B /* Speaker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Speaker.h; sourceTree = "<group>"; };
 		3536A053149BD83F0005CA8B /* Speaker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Speaker.m; sourceTree = "<group>"; };
-		3536A055149BDC9B0005CA8B /* Agenda+Agenda_Internal_.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Agenda+Agenda_Internal_.h"; sourceTree = "<group>"; };
-		3536A056149BDC9B0005CA8B /* Agenda+Agenda_Internal_.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Agenda+Agenda_Internal_.m"; sourceTree = "<group>"; };
-		3536A058149BE77E0005CA8B /* Note+Note_Internal_.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Note+Note_Internal_.h"; sourceTree = "<group>"; };
-		3536A059149BE77E0005CA8B /* Note+Note_Internal_.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Note+Note_Internal_.m"; sourceTree = "<group>"; };
+		3536A05F149F9E110005CA8B /* ExpandoObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExpandoObject.h; sourceTree = "<group>"; };
+		3536A060149F9E110005CA8B /* ExpandoObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExpandoObject.m; sourceTree = "<group>"; };
+		3536A063149FB1670005CA8B /* Agenda+Agenda_Internal_.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Agenda+Agenda_Internal_.h"; sourceTree = "<group>"; };
+		3536A064149FB1680005CA8B /* Agenda+Agenda_Internal_.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Agenda+Agenda_Internal_.m"; sourceTree = "<group>"; };
+		3536A066149FB2330005CA8B /* Note+Note_Internal_.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Note+Note_Internal_.h"; sourceTree = "<group>"; };
+		3536A067149FB2330005CA8B /* Note+Note_Internal_.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Note+Note_Internal_.m"; sourceTree = "<group>"; };
 		3543F925149904C700E89640 /* NotesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotesViewController.h; sourceTree = "<group>"; };
 		3543F926149904C700E89640 /* NotesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotesViewController.m; sourceTree = "<group>"; };
 		3543F929149907CA00E89640 /* NoteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoteViewController.h; sourceTree = "<group>"; };
@@ -159,6 +157,8 @@
 		3543F92F14990BCB00E89640 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		3543F93114990BD600E89640 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		35AE47EA149A772300AAD74A /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		35F8BB8A149FD7CC00C01F4D /* SessionsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SessionsTableViewCell.h; sourceTree = "<group>"; };
+		35F8BB8B149FD7CC00C01F4D /* SessionsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SessionsTableViewCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -215,6 +215,7 @@
 		353155E51497E1A400666DB6 /* Smackdown */ = {
 			isa = PBXGroup;
 			children = (
+				35F8BB89149FD7AE00C01F4D /* Views */,
 				3536A025149BB1680005CA8B /* Models */,
 				35369F8F149AA1100005CA8B /* Assets */,
 				353155E61497E1A400666DB6 /* Supporting Files */,
@@ -237,8 +238,6 @@
 				3543F92D149907DC00E89640 /* ComposeNoteViewController.m */,
 				35369F8C149A9A5D0005CA8B /* HashTagViewController.h */,
 				35369F8D149A9A5D0005CA8B /* HashTagViewController.m */,
-				35369FD0149AA7280005CA8B /* PrecompilerViewController.h */,
-				35369FD1149AA7280005CA8B /* PrecompilerViewController.m */,
 				3536A015149B9DC70005CA8B /* MyAgendaViewController.h */,
 				3536A016149B9DC70005CA8B /* MyAgendaViewController.m */,
 			);
@@ -309,14 +308,23 @@
 				3536A04D149BD83E0005CA8B /* Note.m */,
 				3536A049149BD83D0005CA8B /* Agenda.h */,
 				3536A04A149BD83D0005CA8B /* Agenda.m */,
-				3536A035149BCFF90005CA8B /* Session+Internal.h */,
-				3536A036149BCFF90005CA8B /* Session+Internal.m */,
-				3536A055149BDC9B0005CA8B /* Agenda+Agenda_Internal_.h */,
-				3536A056149BDC9B0005CA8B /* Agenda+Agenda_Internal_.m */,
-				3536A058149BE77E0005CA8B /* Note+Note_Internal_.h */,
-				3536A059149BE77E0005CA8B /* Note+Note_Internal_.m */,
+				3536A05F149F9E110005CA8B /* ExpandoObject.h */,
+				3536A060149F9E110005CA8B /* ExpandoObject.m */,
+				3536A063149FB1670005CA8B /* Agenda+Agenda_Internal_.h */,
+				3536A064149FB1680005CA8B /* Agenda+Agenda_Internal_.m */,
+				3536A066149FB2330005CA8B /* Note+Note_Internal_.h */,
+				3536A067149FB2330005CA8B /* Note+Note_Internal_.m */,
 			);
 			name = Models;
+			sourceTree = "<group>";
+		};
+		35F8BB89149FD7AE00C01F4D /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				35F8BB8A149FD7CC00C01F4D /* SessionsTableViewCell.h */,
+				35F8BB8B149FD7CC00C01F4D /* SessionsTableViewCell.m */,
+			);
+			name = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -426,16 +434,16 @@
 				3543F92B149907CA00E89640 /* NoteViewController.m in Sources */,
 				3543F92E149907DC00E89640 /* ComposeNoteViewController.m in Sources */,
 				35369F8E149A9A5D0005CA8B /* HashTagViewController.m in Sources */,
-				35369FD2149AA7280005CA8B /* PrecompilerViewController.m in Sources */,
 				3536A017149B9DC70005CA8B /* MyAgendaViewController.m in Sources */,
 				3536A021149BB0B50005CA8B /* CodeMashModels.xcdatamodeld in Sources */,
-				3536A037149BCFF90005CA8B /* Session+Internal.m in Sources */,
 				3536A04B149BD83D0005CA8B /* Agenda.m in Sources */,
 				3536A04E149BD83E0005CA8B /* Note.m in Sources */,
 				3536A051149BD83E0005CA8B /* Session.m in Sources */,
 				3536A054149BD83F0005CA8B /* Speaker.m in Sources */,
-				3536A057149BDC9B0005CA8B /* Agenda+Agenda_Internal_.m in Sources */,
-				3536A05A149BE77E0005CA8B /* Note+Note_Internal_.m in Sources */,
+				3536A061149F9E110005CA8B /* ExpandoObject.m in Sources */,
+				3536A065149FB1680005CA8B /* Agenda+Agenda_Internal_.m in Sources */,
+				3536A068149FB2340005CA8B /* Note+Note_Internal_.m in Sources */,
+				35F8BB8C149FD7CC00C01F4D /* SessionsTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

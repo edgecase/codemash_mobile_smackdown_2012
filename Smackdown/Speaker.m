@@ -12,13 +12,6 @@
 
 @implementation Speaker
 
-@dynamic biography;
-@dynamic contactInfo;
-@dynamic name;
-@dynamic speakerLookup;
-@dynamic speakerURI;
-@dynamic twitterHandle;
-@dynamic blogURL;
 @dynamic sessions;
 
 @end

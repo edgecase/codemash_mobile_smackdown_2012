@@ -11,7 +11,7 @@
 
 @class Session;
 
-@interface Agenda : NSManagedObject
+@interface Agenda : ExpandoObject
 
 @property (nonatomic, retain) NSOrderedSet *sessions;
 @end

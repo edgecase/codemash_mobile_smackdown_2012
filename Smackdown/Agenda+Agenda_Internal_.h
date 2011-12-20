@@ -13,4 +13,7 @@
 + (Agenda *)sharedAgenda;
 + (BOOL)isAttendingSession:(Session *)session;
 
+- (void)attendSession:(Session *)session;
+- (void)doNotAttendSession:(Session *)session;
+
 @end

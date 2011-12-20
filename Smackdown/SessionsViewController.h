@@ -12,8 +12,14 @@
   NSArray *sessions;
   IBOutlet UIActivityIndicatorView *spinner;
   Agenda *agenda;
+  
+  // preloaded ux images.
+  UIImage *calendarCheckImage;
+  UIImage *calendarUncheckImage;
 }
 
 - (void)loadSessions;
+- (void)loadRemote:(NSString *)typeOfRemoteEntity;
+- (NSArray *)dataInSection:(NSInteger)section;
 
 @end

@@ -11,7 +11,7 @@
 
 @class Session;
 
-@interface Note : NSManagedObject
+@interface Note : ExpandoObject
 
 @property (nonatomic, retain) NSString * body;
 @property (nonatomic, retain) NSDate * created_at;

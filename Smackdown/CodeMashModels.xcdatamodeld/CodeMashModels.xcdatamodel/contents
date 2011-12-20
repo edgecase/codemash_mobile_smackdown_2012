@@ -1,43 +1,31 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="878" systemVersion="11C74" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
-    <entity name="Agenda" representedClassName="Agenda" syncable="YES">
+    <entity name="Agenda" representedClassName="Agenda" parentEntity="ExpandoObject" syncable="YES">
         <relationship name="sessions" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Session" inverseName="agenda" inverseEntity="Session" syncable="YES"/>
     </entity>
-    <entity name="Note" representedClassName="Note" syncable="YES">
+    <entity name="ExpandoObject" representedClassName="ExpandoObject" isAbstract="YES" syncable="YES">
+        <attribute name="propertyBag" optional="YES" attributeType="Binary" syncable="YES"/>
+    </entity>
+    <entity name="Note" representedClassName="Note" parentEntity="ExpandoObject" syncable="YES">
         <attribute name="body" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="created_at" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="image" optional="YES" attributeType="Binary" syncable="YES"/>
         <relationship name="session" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Session" inverseName="notes" inverseEntity="Session" syncable="YES"/>
     </entity>
-    <entity name="Session" representedClassName="Session" syncable="YES">
-        <attribute name="abstract" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="difficulty" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="lookup" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="room" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="speakerName" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="speakerURI" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="start" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="technology" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="uri" optional="YES" attributeType="String" syncable="YES"/>
+    <entity name="Session" representedClassName="Session" parentEntity="ExpandoObject" syncable="YES">
+        <attribute name="isPrecompiler" optional="YES" attributeType="Boolean" syncable="YES"/>
         <relationship name="agenda" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Agenda" inverseName="sessions" inverseEntity="Agenda" syncable="YES"/>
         <relationship name="notes" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Note" inverseName="session" inverseEntity="Note" syncable="YES"/>
         <relationship name="speaker" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Speaker" inverseName="sessions" inverseEntity="Speaker" syncable="YES"/>
     </entity>
-    <entity name="Speaker" representedClassName="Speaker" syncable="YES">
-        <attribute name="biography" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="blogURL" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="contactInfo" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="speakerLookup" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="speakerURI" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="twitterHandle" optional="YES" attributeType="String" syncable="YES"/>
+    <entity name="Speaker" representedClassName="Speaker" parentEntity="ExpandoObject" syncable="YES">
         <relationship name="sessions" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Session" inverseName="speaker" inverseEntity="Session" syncable="YES"/>
     </entity>
     <elements>
         <element name="Agenda" positionX="198" positionY="-87" width="261" height="60"/>
+        <element name="ExpandoObject" positionX="160" positionY="192" width="128" height="60"/>
         <element name="Note" positionX="-72" positionY="153" width="128" height="105"/>
-        <element name="Session" positionX="153" positionY="123" width="128" height="105"/>
+        <element name="Session" positionX="153" positionY="123" width="128" height="240"/>
         <element name="Speaker" positionX="243" positionY="9" width="128" height="150"/>
     </elements>
 </model>

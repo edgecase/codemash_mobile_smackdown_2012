@@ -11,18 +11,9 @@
 
 @class Agenda, Note, Speaker;
 
-@interface Session : NSManagedObject
+@interface Session : ExpandoObject
 
-@property (nonatomic, retain) NSString * abstract;
-@property (nonatomic, retain) NSString * difficulty;
-@property (nonatomic, retain) NSString * lookup;
-@property (nonatomic, retain) NSString * room;
-@property (nonatomic, retain) NSString * speakerName;
-@property (nonatomic, retain) NSString * speakerURI;
-@property (nonatomic, retain) NSString * start;
-@property (nonatomic, retain) NSString * technology;
-@property (nonatomic, retain) NSString * title;
-@property (nonatomic, retain) NSString * uri;
+@property BOOL isPrecompiler;
 @property (nonatomic, retain) Agenda *agenda;
 @property (nonatomic, retain) NSOrderedSet *notes;
 @property (nonatomic, retain) Speaker *speaker;

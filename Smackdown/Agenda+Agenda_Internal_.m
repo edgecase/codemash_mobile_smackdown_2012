@@ -31,4 +31,20 @@ static Agenda *sharedAgenda = nil;
   return [[sharedAgenda sessions] containsObject:session];
 }
 
+- (void)attendSession:(Session *)session{
+  NSMutableOrderedSet *tempSet =
+  [NSMutableOrderedSet orderedSetWithArray:[[self sessions] array]];
+  [tempSet addObject:session];
+  self.sessions = tempSet;
+}
+
+- (void)doNotAttendSession:(Session *)session{
+  NSMutableOrderedSet *tempSet =
+  [NSMutableOrderedSet orderedSetWithArray:[[self sessions] array]];
+  if ([tempSet containsObject:session]) {
+    [tempSet removeObject:session];
+    self.sessions = tempSet;
+  }
+}
+
 @end

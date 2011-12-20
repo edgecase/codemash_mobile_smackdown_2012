@@ -6,15 +6,10 @@
 //  Copyright (c) 2011 fallenrogue.com. All rights reserved.
 //
 
-
-
-#define TITLE_TAG 10
-#define SPEAKER_TAG 11
-#define CATEGORY_TAG 12
-
 #import "SessionsViewController.h"
 #import "SessionViewController.h"
 #import "CategorySelectionViewController.h"
+#import "SessionsTableViewCell.h"
 
 @implementation SessionsViewController
 
@@ -35,11 +30,16 @@
  }
  */
 
+- (void)preloadImages{
+  calendarCheckImage = [UIImage imageNamed:@"calendar_checked"];
+  calendarUncheckImage = [UIImage imageNamed:@"calendar_unchecked"];
+}
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad{
   [super viewDidLoad];
   agenda = [Agenda sharedAgenda];
+  [self preloadImages];
   [self loadSessions];
 }
 
@@ -52,38 +52,8 @@
                         executeFetchRequest:fetch error:&err];
     
     if(!results || [results count] == 0){ 
-      NSURL *sessionURL = [NSURL URLWithString:@"http://codemash.org/rest/sessions.json"];
-      NSURLRequest *req = [NSURLRequest requestWithURL:sessionURL cachePolicy:NSURLCacheStorageAllowed timeoutInterval:2];
-      [NSURLConnection sendAsynchronousRequest:req 
-                                         queue:[NSOperationQueue currentQueue]
-                             completionHandler:
-       ^(NSURLResponse *resp, NSData *data, NSError *err) {
-         if(err){
-           [spinner stopAnimating];
-           [[[UIAlertView alloc] initWithTitle:@"Oh noes!" 
-                                       message:[err description] 
-                                      delegate:nil 
-                             cancelButtonTitle:@"ok" 
-                             otherButtonTitles:nil]
-            show];
-         } else {
-           [spinner startAnimating];
-           dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-             NSError *jsonErr = nil;
-             NSArray *sessionDics = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&jsonErr];
-             NSMutableArray *ts = [NSMutableArray arrayWithCapacity:[sessionDics count]];
-             for(NSMutableDictionary *dic in sessionDics){
-               [ts addObject:[Session sessionWithAttributes:dic]];
-             }
-             sessions = [NSArray arrayWithArray:ts];
-             [[LGAppDelegate sharedAppDelegate] saveContext:self];
-             dispatch_async(dispatch_get_main_queue(), ^{
-               if(!jsonErr) [self.tableView reloadData];
-               [spinner stopAnimating];
-             });
-           });
-         }
-       }];
+      [self loadRemote:@"Session"];
+      [self loadRemote:@"Precompiler"];
     } else {
       sessions = results;
       [self.tableView reloadData];
@@ -91,32 +61,108 @@
   } 
 }
 
+- (void)loadRemote:(NSString *)typeOfRemoteEntity{
+  NSURL *sessionURL = nil;
+  if([typeOfRemoteEntity isEqualToString:@"Session"]){
+    sessionURL = [NSURL URLWithString:@"http://codemash.org/rest/sessions.json"]; 
+  } else {
+    sessionURL = [NSURL URLWithString:@"http://codemash.org/rest/precompiler.json"];
+  }
+  NSURLRequest *req = [NSURLRequest requestWithURL:sessionURL cachePolicy:NSURLCacheStorageAllowed timeoutInterval:2];
+  [NSURLConnection sendAsynchronousRequest:req 
+                                     queue:[NSOperationQueue currentQueue]
+                         completionHandler:
+   ^(NSURLResponse *resp, NSData *data, NSError *err) {
+     if(err){
+       [spinner stopAnimating];
+       [[[UIAlertView alloc] initWithTitle:@"Oh noes!" 
+                                   message:[err description] 
+                                  delegate:nil 
+                         cancelButtonTitle:@"ok" 
+                         otherButtonTitles:nil]
+        show];
+     } else {
+       [spinner startAnimating];
+       dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+         NSError *jsonErr = nil;
+         NSArray *sessionDics = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&jsonErr];
+         NSMutableArray *ts = [NSMutableArray arrayWithCapacity:[sessionDics count]];
+         for(NSMutableDictionary *dic in sessionDics){
+           Session *obj = [Session createObjectOfType:@"Session" Attributes:dic];
+           [obj dateProperty];
+           obj.isPrecompiler = ([typeOfRemoteEntity isEqualToString:@"Precompiler"]);
+           [ts addObject:obj];
+         }
+         [ts addObjectsFromArray:sessions];
+         sessions = [NSArray arrayWithArray:ts];
+         [[LGAppDelegate sharedAppDelegate] saveContext:self];
+         dispatch_async(dispatch_get_main_queue(), ^{
+           if(!jsonErr) [self.tableView reloadData];
+           [spinner stopAnimating];
+         });
+       });
+     }
+   }];
+}
+
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation{
   return YES;
 }
 
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+  return 2;
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-  return (sessions) ? [sessions count] : 0;
+  return [[self dataInSection:section] count];
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
+  switch (section) {
+    case 0:
+      return @"Precompiler";
+      break;
+      
+    default:
+      return @"Sessions";
+      break;
+  }
+}
+
+- (NSArray *)dataInSection:(NSInteger)section{
+  switch (section) {
+    case 0:
+      return [sessions filteredArrayUsingPredicate:
+       [NSPredicate predicateWithFormat:@"isPrecompiler = %@", [NSNumber numberWithBool:YES]]];
+      break;
+    
+    case 1:
+      return [sessions filteredArrayUsingPredicate:
+              [NSPredicate predicateWithFormat:@"isPrecompiler = %@", [NSNumber numberWithBool:NO]]];
+      break;
+    default:
+      return [NSArray array];
+      break;
+  }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-  UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"sessionCell"];
+  SessionsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"sessionCell"];
   if(!cell){
-    cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"sessionCell"];
+    cell = (SessionsTableViewCell *)[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"sessionCell"];
   }
   
-  Session *session = [sessions objectAtIndex:indexPath.row];
-  
-  [[cell viewWithTag:TITLE_TAG] setValue:session.title forKeyPath:@"text"];
-  [[cell viewWithTag:SPEAKER_TAG] setValue:session.speakerName forKeyPath:@"text"];
-  [[cell viewWithTag:CATEGORY_TAG] setValue:session.technology forKeyPath:@"text"];
-  
-  if([Agenda isAttendingSession:session]){
-    [cell setAccessoryType:UITableViewCellAccessoryCheckmark];
-  } else {
-    [cell setAccessoryType:UITableViewCellAccessoryNone];
-  }
-  
+  Session *session = [[self dataInSection:indexPath.section] objectAtIndex:indexPath.row];
+
+  cell.titleView.text = [session valueForKeyPath:@"properties.Title"];
+  cell.detailView.text = 
+  [NSString stringWithFormat:@"%@ - %@",
+   [session valueForKeyPath:@"properties.Technology"],
+   [session dateProperty]];
+
+  cell.checkboxView.image = ([Agenda isAttendingSession:session]) ? calendarCheckImage : calendarUncheckImage;
+  cell.difficultyView.image = [UIImage imageNamed:[[session valueForKeyPath:@"properties.Difficulty"] lowercaseString]];
+    
   return cell;
 }
 
@@ -127,24 +173,27 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
   if([[segue identifier] isEqualToString:@"showSessionDetails"]){
     SessionViewController *sessionController = (SessionViewController *)[segue destinationViewController];
-    sessionController.session = [sessions objectAtIndex:[self.tableView indexPathForSelectedRow].row];
+    NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+    sessionController.session = [[self dataInSection:indexPath.section] objectAtIndex:indexPath.row];
+
   } else if([[segue identifier] isEqualToString:@"showCategorySelection"]){
     CategorySelectionViewController *catController = (CategorySelectionViewController *)[segue destinationViewController];
     catController.categories = 
-    [sessions valueForKeyPath:@"@distinctUnionOfObjects.Technology"];
+    [sessions valueForKeyPath:@"properties.@distinctUnionOfObjects.Technology"];
   }
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
   if (editingStyle == UITableViewCellEditingStyleDelete){
-    Session *session = [sessions objectAtIndex:indexPath.row];
+    Session *session = [[self dataInSection:indexPath.section] objectAtIndex:indexPath.row];
     BOOL isAttending = [Agenda isAttendingSession:session];
 
     if(isAttending)
-      [agenda removeSessionsObject:session];
+      [agenda doNotAttendSession:session];
     else 
-      [agenda addSessionsObject:session];
+      [agenda attendSession:session];
     
+    [[LGAppDelegate sharedAppDelegate] saveContext:self];
     [tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
   }
 }

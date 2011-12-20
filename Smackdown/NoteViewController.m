@@ -55,7 +55,7 @@
   if(note && session){
     noteView.text = [note objectForKey:@"body"];
     timeStampView.text = [note objectForKey:@"created_at"];
-    self.title = sessionTitleView.text = session.title;
+    self.title = sessionTitleView.text = [session valueForKeyPath:@"properties.Title"];
   } 
 }
 
