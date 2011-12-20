@@ -20,51 +20,6 @@
             </objects>
             <point key="canvasLocation" x="-144" y="-686"/>
         </scene>
-        <scene sceneID="Hx6-Y5-iXu">
-            <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ZPa-J0-lRC" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tableViewController hidesBottomBarWhenPushed="YES" id="4Br-VL-o89" customClass="CategorySelectionViewController" sceneMemberID="viewController">
-                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" allowsSelection="NO" allowsSelectionDuringEditing="YES" allowsMultipleSelectionDuringEditing="YES" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="DK5-t3-xxT">
-                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="categoryCell" textLabel="dXJ-LT-3WR" detailTextLabel="B6h-Jy-2fR" style="IBUITableViewCellStyleSubtitle" id="zj5-7J-hGP">
-                                <rect key="frame" x="0.0" y="22" width="320" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="dXJ-LT-3WR">
-                                            <rect key="frame" x="10" y="2" width="38" height="22"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                            <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        </label>
-                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" text="Subtitle" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="B6h-Jy-2fR">
-                                            <rect key="frame" x="10" y="24" width="47" height="18"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <color key="textColor" red="0.50196081399917603" green="0.50196081399917603" blue="0.50196081399917603" alpha="1" colorSpace="calibratedRGB"/>
-                                            <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        </label>
-                                    </subviews>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                </view>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="4Br-VL-o89" id="Mm3-9i-8hT"/>
-                            <outlet property="delegate" destination="4Br-VL-o89" id="AqG-rM-VHI"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" id="jtO-BC-3t3"/>
-                </tableViewController>
-            </objects>
-            <point key="canvasLocation" x="293" y="-1347"/>
-        </scene>
         <scene sceneID="H5V-N7-9mm">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="D3A-CV-ByU" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -122,11 +77,6 @@
                     </tableView>
                     <tabBarItem key="tabBarItem" title="Sessions" id="AzC-9B-luz"/>
                     <navigationItem key="navigationItem" title="Sessions" id="cqk-os-Mka">
-                        <barButtonItem key="leftBarButtonItem" title="Categories" id="HCo-vP-f9R">
-                            <connections>
-                                <segue destination="4Br-VL-o89" kind="push" identifier="showCategorySelection" id="LOf-jL-CPf"/>
-                            </connections>
-                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" id="r2a-3o-PxN">
                             <view key="customView" hidden="YES" opaque="NO" contentMode="scaleToFill" id="0Br-UU-NBw">
                                 <rect key="frame" x="255" y="5" width="60" height="33"/>
@@ -238,7 +188,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="800" y="-590"/>
+            <point key="canvasLocation" x="1456" y="-566"/>
         </scene>
         <scene sceneID="VHY-Js-AOO">
             <objects>
@@ -292,7 +242,7 @@
                     </navigationItem>
                 </tableViewController>
             </objects>
-            <point key="canvasLocation" x="1127" y="42"/>
+            <point key="canvasLocation" x="2039" y="-582"/>
         </scene>
         <scene sceneID="W16-wf-wH8">
             <objects>
@@ -305,7 +255,7 @@
                     </view>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="1556" y="388"/>
+            <point key="canvasLocation" x="2468" y="-236"/>
         </scene>
         <scene sceneID="gbh-R2-Oda">
             <objects>
@@ -370,7 +320,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="1556" y="-184"/>
+            <point key="canvasLocation" x="2468" y="-808"/>
         </scene>
         <scene sceneID="BSK-Z9-2h4">
             <objects>
@@ -415,7 +365,7 @@
                     <tabBarItem key="tabBarItem" title="#codemash" image="hashtag_tabbar.png" id="gTd-ID-ifo"/>
                 </tableViewController>
             </objects>
-            <point key="canvasLocation" x="-484" y="504"/>
+            <point key="canvasLocation" x="-392" y="1440"/>
         </scene>
         <scene sceneID="Nni-E1-8mP">
             <objects>
@@ -444,7 +394,7 @@
                     <tabBarItem key="tabBarItem" title="Speakers" image="speaker.png" id="yC8-cY-U8H"/>
                 </tableViewController>
             </objects>
-            <point key="canvasLocation" x="-130" y="656"/>
+            <point key="canvasLocation" x="386" y="1456"/>
         </scene>
         <scene sceneID="0b3-TW-EAR">
             <objects>
@@ -459,7 +409,7 @@
                     </connections>
                 </navigationController>
             </objects>
-            <point key="canvasLocation" x="-1650" y="-57"/>
+            <point key="canvasLocation" x="1062" y="1119"/>
         </scene>
         <scene sceneID="viy-g3-6y6">
             <objects>
@@ -518,7 +468,7 @@
                     <navigationItem key="navigationItem" title="My Agenda" id="s4B-rP-sLA"/>
                 </tableViewController>
             </objects>
-            <point key="canvasLocation" x="-1211" y="-18"/>
+            <point key="canvasLocation" x="1573" y="1119"/>
         </scene>
         <scene sceneID="wiZ-r5-455">
             <objects>
@@ -551,9 +501,6 @@
         <image name="speaker.png" width="28" height="25"/>
     </resources>
     <classes>
-        <class className="CategorySelectionViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CategorySelectionViewController.h"/>
-        </class>
         <class className="ComposeNoteViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ComposeNoteViewController.h"/>
             <relationships>

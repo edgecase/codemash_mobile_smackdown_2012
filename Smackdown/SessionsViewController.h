@@ -10,8 +10,9 @@
 
 @interface SessionsViewController : UITableViewController{
   NSArray *sessions;
-  IBOutlet UIActivityIndicatorView *spinner;
   Agenda *agenda;
+
+  IBOutlet UIActivityIndicatorView *spinner;
   
   // preloaded ux images.
   UIImage *calendarCheckImage;

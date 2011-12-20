@@ -17,7 +17,6 @@
 		353155F61497E1A400666DB6 /* LGViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 353155F51497E1A400666DB6 /* LGViewController.m */; };
 		353155FE1497E55E00666DB6 /* SessionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 353155FD1497E55E00666DB6 /* SessionsViewController.m */; };
 		353156011497F33700666DB6 /* SessionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 353156001497F33700666DB6 /* SessionViewController.m */; };
-		35315604149801F600666DB6 /* CategorySelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 35315603149801F600666DB6 /* CategorySelectionViewController.m */; };
 		35369F8A149A96A80005CA8B /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35369F89149A96A80005CA8B /* Twitter.framework */; };
 		35369F8E149A9A5D0005CA8B /* HashTagViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 35369F8D149A9A5D0005CA8B /* HashTagViewController.m */; };
 		35369FF3149B95B40005CA8B /* advanced.png in Resources */ = {isa = PBXBuildFile; fileRef = 35369FD3149B95B40005CA8B /* advanced.png */; };
@@ -91,8 +90,6 @@
 		353155FD1497E55E00666DB6 /* SessionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SessionsViewController.m; sourceTree = "<group>"; };
 		353155FF1497F33700666DB6 /* SessionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SessionViewController.h; sourceTree = "<group>"; };
 		353156001497F33700666DB6 /* SessionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SessionViewController.m; sourceTree = "<group>"; };
-		35315602149801F500666DB6 /* CategorySelectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategorySelectionViewController.h; sourceTree = "<group>"; };
-		35315603149801F600666DB6 /* CategorySelectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategorySelectionViewController.m; sourceTree = "<group>"; };
 		35369F89149A96A80005CA8B /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
 		35369F8C149A9A5D0005CA8B /* HashTagViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HashTagViewController.h; sourceTree = "<group>"; };
 		35369F8D149A9A5D0005CA8B /* HashTagViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HashTagViewController.m; sourceTree = "<group>"; };
@@ -228,8 +225,6 @@
 				353155FD1497E55E00666DB6 /* SessionsViewController.m */,
 				353155FF1497F33700666DB6 /* SessionViewController.h */,
 				353156001497F33700666DB6 /* SessionViewController.m */,
-				35315602149801F500666DB6 /* CategorySelectionViewController.h */,
-				35315603149801F600666DB6 /* CategorySelectionViewController.m */,
 				3543F925149904C700E89640 /* NotesViewController.h */,
 				3543F926149904C700E89640 /* NotesViewController.m */,
 				3543F929149907CA00E89640 /* NoteViewController.h */,
@@ -429,7 +424,6 @@
 				353155F61497E1A400666DB6 /* LGViewController.m in Sources */,
 				353155FE1497E55E00666DB6 /* SessionsViewController.m in Sources */,
 				353156011497F33700666DB6 /* SessionViewController.m in Sources */,
-				35315604149801F600666DB6 /* CategorySelectionViewController.m in Sources */,
 				3543F927149904C700E89640 /* NotesViewController.m in Sources */,
 				3543F92B149907CA00E89640 /* NoteViewController.m in Sources */,
 				3543F92E149907DC00E89640 /* ComposeNoteViewController.m in Sources */,

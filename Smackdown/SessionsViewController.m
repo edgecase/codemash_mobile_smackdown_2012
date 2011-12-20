@@ -8,7 +8,6 @@
 
 #import "SessionsViewController.h"
 #import "SessionViewController.h"
-#import "CategorySelectionViewController.h"
 #import "SessionsTableViewCell.h"
 
 @implementation SessionsViewController
@@ -175,11 +174,6 @@
     SessionViewController *sessionController = (SessionViewController *)[segue destinationViewController];
     NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
     sessionController.session = [[self dataInSection:indexPath.section] objectAtIndex:indexPath.row];
-
-  } else if([[segue identifier] isEqualToString:@"showCategorySelection"]){
-    CategorySelectionViewController *catController = (CategorySelectionViewController *)[segue destinationViewController];
-    catController.categories = 
-    [sessions valueForKeyPath:@"properties.@distinctUnionOfObjects.Technology"];
   }
 }
 
