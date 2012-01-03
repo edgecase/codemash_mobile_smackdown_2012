@@ -8,18 +8,13 @@
 
 #import "MyAgendaViewController.h"
 #import "SessionsTableViewCell.h"
+#import "SessionViewController.h"
 
 @interface MyAgendaViewController(Internal)
--(BOOL)hasAgenda;
+- (void)setupFetchController;
 @end
 
-
-
 @implementation MyAgendaViewController
-
-- (BOOL)hasAgenda{
-  return (myAgenda && [myAgenda count] > 0);
-}
 
 - (void)didReceiveMemoryWarning
 {
@@ -29,12 +24,41 @@
     // Release any cached data, images, etc that aren't in use.
 }
 
+- (void)setupFetchController{
+  NSFetchRequest *req;
+  NSManagedObjectContext *ctx;
+  NSSortDescriptor *sortByDate;
+  NSPredicate *myAgendaPredicate;
+  NSString *sectionKey;
+  NSString *cacheKey;
+  NSError *fetchError;
+  
+  req = [NSFetchRequest fetchRequestWithEntityName:@"Session"];
+  myAgendaPredicate = [NSPredicate predicateWithFormat:@"attending == 1"];
+  sortByDate = [NSSortDescriptor sortDescriptorWithKey:@"startAt" ascending:YES];
+  [req setSortDescriptors:[NSArray arrayWithObject:sortByDate]];
+  [req setPredicate:myAgendaPredicate];
+  sectionKey = @"timeSlot";
+  cacheKey = @"SessionsList";
+  ctx = [[LGAppDelegate sharedAppDelegate] managedObjectContext];
+  
+  [NSFetchedResultsController deleteCacheWithName:cacheKey];
+  fetchController = [[NSFetchedResultsController alloc] initWithFetchRequest:req 
+                                                        managedObjectContext:ctx
+                                                          sectionNameKeyPath:sectionKey
+                                                                   cacheName:cacheKey];
+  
+  if(![fetchController performFetch:&fetchError]){
+    NSLog(@"fetch error: %@", fetchError); exit(-1);
+  }
+}
+
+
 #pragma mark - View lifecycle
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
@@ -53,12 +77,13 @@
 - (void)viewWillAppear:(BOOL)animated
 {
   [super viewWillAppear:animated];
-  myAgenda = [[[Agenda sharedAgenda] sessions] array];
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
   [super viewDidAppear:animated];
+  if(!fetchController) [self setupFetchController];
+  [[self tableView] reloadData];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -79,35 +104,26 @@
 
 #pragma mark - Table view data source
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-  return (![self hasAgenda]) ? 1 : [myAgenda count];
-}
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
   static NSString *CellIdentifier = @"agendaCell";
   
-  SessionsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-  if (cell == nil) {
-      cell = (SessionsTableViewCell *)[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
+  SessionsTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+  if (!cell) {
+      cell = [[SessionsTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
   }
-
-  if(![self hasAgenda]){
-    cell.titleView.text = @"No Sessions selected.";
-    cell.detailView.text = @"go to the sessions tab and swipe to select";
-  } else {
-    Session *session = [myAgenda objectAtIndex:indexPath.row];
-    cell.titleView.text = [session valueForKeyPath:@"properties.Title"];
-    cell.detailView.text = [session valueForKeyPath:@"properties.Room"];
-    cell.difficultyView.image = [UIImage imageNamed:[[session valueForKeyPath:@"properties.Difficulty"] lowercaseString]];
-  }
+  
+  Session *session = [fetchController objectAtIndexPath:indexPath];
+  cell.titleView.text = [session valueForKeyPath:@"properties.Title"];
+  cell.detailView.text = [session valueForKeyPath:@"properties.Room"];
+  cell.difficultyView.image = [UIImage imageNamed:[[session valueForKeyPath:@"properties.Difficulty"] lowercaseString]];
 
   return cell;
 }
 
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath{
-  return [self hasAgenda];
+  return YES;
 }
 
 // Override to support editing the table view.
@@ -115,30 +131,43 @@
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
       [tableView beginUpdates];
-      Session *session = [myAgenda objectAtIndex:indexPath.row];
+      Session *session = [fetchController objectAtIndexPath:indexPath];
 
-      [[Agenda sharedAgenda] doNotAttendSession:session];
-      myAgenda = [[[Agenda sharedAgenda] sessions] array];
+      session.attending = !session.attending;
       [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
       [tableView endUpdates];
     }   
 }
 
-- (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-  if(![self hasAgenda]) return nil;
-  return indexPath;
-}
 #pragma mark - Table view delegate
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     */
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+  [self performSegueWithIdentifier:@"showMySessionDetails" sender:self.navigationController];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+  if([[segue identifier] isEqualToString:@"showMySessionDetails"]){
+    SessionViewController *sessionController = (SessionViewController *)[segue destinationViewController];
+    sessionController.session = [fetchController objectAtIndexPath:[self.tableView indexPathForSelectedRow]];
+  }
+}
+
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller{
+  [self.tableView reloadData];
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+  return [[fetchController sections] count];
+}
+
+- (NSInteger)tableView:(UITableView *)table numberOfRowsInSection:(NSInteger)section {
+  id <NSFetchedResultsSectionInfo> sectionInfo = [[fetchController sections] objectAtIndex:section];
+  return [sectionInfo numberOfObjects];
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section { 
+  id <NSFetchedResultsSectionInfo> sectionInfo = [[fetchController sections] objectAtIndex:section];
+  return [sectionInfo name];
 }
 
 @end

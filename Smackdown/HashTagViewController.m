@@ -51,6 +51,7 @@
     
     TWRequest *req = [[TWRequest alloc] initWithURL:[NSURL URLWithString:@"http://search.twitter.com/search.json"] parameters:params requestMethod:TWRequestMethodGET];
     [req performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
+      if(!error){
       tweets = [[NSJSONSerialization JSONObjectWithData:responseData options:0 error:NULL] objectForKey:@"results"];
       
       dispatch_async(dispatch_get_main_queue(), ^{
@@ -60,6 +61,7 @@
           canRefresh = YES;
         });
       });
+      }
     }];
   }
 }

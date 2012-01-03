@@ -15,7 +15,7 @@
 
 @property (nonatomic, retain) NSString * body;
 @property (nonatomic, retain) NSDate * created_at;
-@property (nonatomic, retain) NSData * image;
+@property (nonatomic, retain) UIImage * image;
 @property (nonatomic, retain) Session *session;
 
 @end

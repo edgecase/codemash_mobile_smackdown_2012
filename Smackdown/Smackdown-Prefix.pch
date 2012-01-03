@@ -15,11 +15,9 @@
 #import <Twitter/Twitter.h>
 #import "LGAppDelegate.h"
 #import "ExpandoObject.h"
-#import "Agenda.h"
 #import "Session.h"
 #import "Speaker.h"
 #import "Note.h"
-#import "Agenda+Agenda_Internal_.h"
 #import "Note+Note_Internal_.h"
 
 #endif

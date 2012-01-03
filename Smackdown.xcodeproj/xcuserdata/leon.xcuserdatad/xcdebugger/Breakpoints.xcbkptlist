@@ -9,25 +9,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "Smackdown/SessionsViewController.m"
-         timestampString = "346023110.271785"
+         timestampString = "347310285.30701"
          startingColumnNumber = "2147483647"
          endingColumnNumber = "2147483647"
-         startingLineNumber = "205"
-         endingLineNumber = "205"
-         landmarkName = "-tableView:titleForDeleteConfirmationButtonForRowAtIndexPath:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         isPathRelative = "1"
-         filePath = "Smackdown/SessionsViewController.m"
-         timestampString = "346107399.965734"
-         startingColumnNumber = "2147483647"
-         endingColumnNumber = "2147483647"
-         startingLineNumber = "225"
-         endingLineNumber = "225">
+         startingLineNumber = "232"
+         endingLineNumber = "232">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"

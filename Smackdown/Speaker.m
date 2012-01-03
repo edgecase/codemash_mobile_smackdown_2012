@@ -13,5 +13,10 @@
 @implementation Speaker
 
 @dynamic sessions;
+@dynamic name;
+@dynamic bio;
+@dynamic blog;
+@dynamic twitter;
+@dynamic speakerID;
 
 @end

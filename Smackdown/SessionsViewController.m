@@ -10,6 +10,12 @@
 #import "SessionViewController.h"
 #import "SessionsTableViewCell.h"
 
+#import "Speaker.h"
+
+@interface SessionsViewController(Internal)
+- (void)setupFetchController:(NSString *)optionalSearchTerm;
+@end
+
 @implementation SessionsViewController
 
 - (void)didReceiveMemoryWarning
@@ -22,42 +28,75 @@
 
 #pragma mark - View lifecycle
 
-/*
- // Implement loadView to create a view hierarchy programmatically, without using a nib.
- - (void)loadView
- {
- }
- */
-
 - (void)preloadImages{
   calendarCheckImage = [UIImage imageNamed:@"calendar_checked"];
   calendarUncheckImage = [UIImage imageNamed:@"calendar_unchecked"];
 }
 
+- (void)setupFetchController:(NSString *)optionalSearchTerm{
+  NSFetchRequest *req;
+  NSManagedObjectContext *ctx;
+  NSSortDescriptor *sortByDate;
+  NSString *sectionKey;
+  NSString *cacheKey;
+  NSError *fetchError;
+  
+  req = [NSFetchRequest fetchRequestWithEntityName:@"Session"];
+  
+  if(optionalSearchTerm){
+    NSPredicate *predicateForSearchTerm;
+    predicateForSearchTerm = [NSPredicate predicateWithFormat:@"name contains[cd] %@", optionalSearchTerm];
+    [req setPredicate:predicateForSearchTerm];
+  }
+  
+  sortByDate = [NSSortDescriptor sortDescriptorWithKey:@"startAt" ascending:YES];
+  [req setSortDescriptors:[NSArray arrayWithObject:sortByDate]];
+  sectionKey = @"timeSlot";
+  cacheKey = @"SessionsList";
+  ctx = [[LGAppDelegate sharedAppDelegate] managedObjectContext];
+  
+  [NSFetchedResultsController deleteCacheWithName:cacheKey];
+  fetchController = [[NSFetchedResultsController alloc] initWithFetchRequest:req 
+                                                        managedObjectContext:ctx
+                                                          sectionNameKeyPath:sectionKey
+                                                                   cacheName:cacheKey];
+  
+  if(![fetchController performFetch:&fetchError]){
+    NSLog(@"fetch error: %@", fetchError); exit(-1);
+  }
+}
+
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad{
   [super viewDidLoad];
-  agenda = [Agenda sharedAgenda];
   [self preloadImages];
   [self loadSessions];
+  [self setupFetchController:nil];
+}
+
+- (void)viewWillAppear:(BOOL)animated{
+  [super viewWillAppear:animated];
+  [self.tableView reloadData];
+  //[self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
+}
+
+- (void)viewDidAppear:(BOOL)animated{
+  [super viewDidAppear:animated];
+  
+  [self.navigationController setNavigationBarHidden:YES animated:YES];
 }
 
 - (void)loadSessions{
-  if(!sessions){
-    NSFetchRequest *fetch = [NSFetchRequest fetchRequestWithEntityName:@"Session"];
-    
-    NSError *err = nil;
-    NSArray *results = [[[LGAppDelegate sharedAppDelegate] managedObjectContext] 
-                        executeFetchRequest:fetch error:&err];
-    
-    if(!results || [results count] == 0){ 
-      [self loadRemote:@"Session"];
-      [self loadRemote:@"Precompiler"];
-    } else {
-      sessions = results;
-      [self.tableView reloadData];
-    }
-  } 
+  NSFetchRequest *fetch = [NSFetchRequest fetchRequestWithEntityName:@"Session"];
+  
+  NSError *err = nil;
+  int results = [[[LGAppDelegate sharedAppDelegate] managedObjectContext] 
+                 countForFetchRequest:fetch error:&err];
+  
+  if(results == 0){ 
+    [self loadRemote:@"Session"];
+    [self loadRemote:@"Precompiler"];
+  }
 }
 
 - (void)loadRemote:(NSString *)typeOfRemoteEntity{
@@ -85,18 +124,18 @@
        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
          NSError *jsonErr = nil;
          NSArray *sessionDics = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&jsonErr];
-         NSMutableArray *ts = [NSMutableArray arrayWithCapacity:[sessionDics count]];
          for(NSMutableDictionary *dic in sessionDics){
-           Session *obj = [Session createObjectOfType:@"Session" Attributes:dic];
-           [obj dateProperty];
-           obj.isPrecompiler = ([typeOfRemoteEntity isEqualToString:@"Precompiler"]);
-           [ts addObject:obj];
+           Session *obj = [Session createObjectOfType:@"Session" attributes:dic];
+           obj.name = [obj valueForKeyPath:@"properties.Title"];
+           obj.startAt = [obj dateProperty];
+           obj.precompiler = ([typeOfRemoteEntity isEqualToString:@"Precompiler"]);
+           obj.attending = NO;
          }
-         [ts addObjectsFromArray:sessions];
-         sessions = [NSArray arrayWithArray:ts];
-         [[LGAppDelegate sharedAppDelegate] saveContext:self];
          dispatch_async(dispatch_get_main_queue(), ^{
-           if(!jsonErr) [self.tableView reloadData];
+           if(!jsonErr){
+             [[LGAppDelegate sharedAppDelegate] saveContext:self];
+             [self.tableView reloadData];
+           }
            [spinner stopAnimating];
          });
        });
@@ -108,50 +147,13 @@
   return YES;
 }
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-  return 2;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-  return [[self dataInSection:section] count];
-}
-
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
-  switch (section) {
-    case 0:
-      return @"Precompiler";
-      break;
-      
-    default:
-      return @"Sessions";
-      break;
-  }
-}
-
-- (NSArray *)dataInSection:(NSInteger)section{
-  switch (section) {
-    case 0:
-      return [sessions filteredArrayUsingPredicate:
-       [NSPredicate predicateWithFormat:@"isPrecompiler = %@", [NSNumber numberWithBool:YES]]];
-      break;
-    
-    case 1:
-      return [sessions filteredArrayUsingPredicate:
-              [NSPredicate predicateWithFormat:@"isPrecompiler = %@", [NSNumber numberWithBool:NO]]];
-      break;
-    default:
-      return [NSArray array];
-      break;
-  }
-}
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
   SessionsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"sessionCell"];
   if(!cell){
-    cell = (SessionsTableViewCell *)[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"sessionCell"];
+    cell = [self.tableView dequeueReusableCellWithIdentifier:@"sessionCell"];
   }
   
-  Session *session = [[self dataInSection:indexPath.section] objectAtIndex:indexPath.row];
+  Session *session = [fetchController objectAtIndexPath:indexPath];
 
   cell.titleView.text = [session valueForKeyPath:@"properties.Title"];
   cell.detailView.text = 
@@ -159,33 +161,29 @@
    [session valueForKeyPath:@"properties.Technology"],
    [session dateProperty]];
 
-  cell.checkboxView.image = ([Agenda isAttendingSession:session]) ? calendarCheckImage : calendarUncheckImage;
+  cell.checkboxView.image = ([session attending]) ? calendarCheckImage : calendarUncheckImage;
   cell.difficultyView.image = [UIImage imageNamed:[[session valueForKeyPath:@"properties.Difficulty"] lowercaseString]];
-    
+  
+  [cell setNeedsDisplay];
   return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+  selectedSession = [fetchController objectAtIndexPath:indexPath];
   [self performSegueWithIdentifier:@"showSessionDetails" sender:self];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
   if([[segue identifier] isEqualToString:@"showSessionDetails"]){
     SessionViewController *sessionController = (SessionViewController *)[segue destinationViewController];
-    NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-    sessionController.session = [[self dataInSection:indexPath.section] objectAtIndex:indexPath.row];
+    sessionController.session = selectedSession;
   }
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
   if (editingStyle == UITableViewCellEditingStyleDelete){
-    Session *session = [[self dataInSection:indexPath.section] objectAtIndex:indexPath.row];
-    BOOL isAttending = [Agenda isAttendingSession:session];
-
-    if(isAttending)
-      [agenda doNotAttendSession:session];
-    else 
-      [agenda attendSession:session];
+    Session *session = [fetchController objectAtIndexPath:indexPath];
+    session.attending = !session.attending;
     
     [[LGAppDelegate sharedAppDelegate] saveContext:self];
     [tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
@@ -193,10 +191,41 @@
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath{
-  Session *session = [sessions objectAtIndex:indexPath.row];
+  Session *session = [fetchController objectAtIndexPath:indexPath];
   
-  BOOL isAttending = [Agenda isAttendingSession:session];
-  return (isAttending) ? @"don't attend" : @"attend";
+  return ([session attending]) ? @"don't attend" : @"attend";
 }
+
+- (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString{
+  [self setupFetchController:searchString];
+  return YES;
+}
+
+- (void) searchDisplayControllerWillEndSearch:(UISearchDisplayController *)controller{
+  [self setupFetchController:nil];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+  return 55.0f;
+}
+
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller{
+  [self.tableView reloadData];
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+  return [[fetchController sections] count];
+}
+
+- (NSInteger)tableView:(UITableView *)table numberOfRowsInSection:(NSInteger)section {
+  id <NSFetchedResultsSectionInfo> sectionInfo = [[fetchController sections] objectAtIndex:section];
+  return [sectionInfo numberOfObjects];
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section { 
+  id <NSFetchedResultsSectionInfo> sectionInfo = [[fetchController sections] objectAtIndex:section];
+  return [sectionInfo name];
+}
+
 
 @end

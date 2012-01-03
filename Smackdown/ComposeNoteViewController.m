@@ -105,6 +105,8 @@
 - (IBAction)cancel:(id)sender{
   if (delegate && [delegate respondsToSelector:@selector(userDidCancel:)]) {
     [delegate userDidCancel:self];
+  } else {
+    [self dismissModalViewControllerAnimated:YES];
   }
 }
 
@@ -122,6 +124,8 @@
   [session addNotesObject:newNote];
   if (delegate && [delegate respondsToSelector:@selector(userCreatedNote:sender:)]) {
     [delegate userCreatedNote:newNote sender:self];
+  } else {
+    [self dismissModalViewControllerAnimated:YES];
   }
 }
 

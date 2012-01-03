@@ -9,14 +9,19 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class Agenda, Note, Speaker;
+@class Note, Speaker;
 
 @interface Session : ExpandoObject
 
-@property BOOL isPrecompiler;
-@property (nonatomic, retain) Agenda *agenda;
+@property BOOL precompiler;
+@property BOOL attending;
 @property (nonatomic, retain) NSOrderedSet *notes;
 @property (nonatomic, retain) Speaker *speaker;
+@property (nonatomic, retain) NSDate *startAt;
+@property (strong, nonatomic) NSString *name;
+@property (strong, nonatomic) NSString *timeSlot;
+@property (strong, nonatomic) NSString *sessionID;
+
 @end
 
 @interface Session (CoreDataGeneratedAccessors)

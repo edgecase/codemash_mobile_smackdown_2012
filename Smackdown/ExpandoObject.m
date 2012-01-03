@@ -9,27 +9,9 @@
 #import "ExpandoObject.h"
 
 @implementation ExpandoObject
-@synthesize properties;
-@dynamic propertyBag;
+@dynamic properties;
 
-- (void)awakeFromFetch{
-  NSKeyedUnarchiver *unarchiver = [[NSKeyedUnarchiver alloc] initForReadingWithData:self.propertyBag];
-  self.properties = [unarchiver decodeObjectForKey:@"properties"];
-  [self dateProperty]; // memoize the date object because we sort on it.
-  [unarchiver finishDecoding];
-}
-
-- (void)resetPropertyBag{
-  if(properties){
-    NSMutableData *data = [[NSMutableData alloc] init];
-    NSKeyedArchiver *archiver = [[NSKeyedArchiver alloc] initForWritingWithMutableData:data];
-    [archiver encodeObject:properties forKey:@"properties"];
-    [archiver finishEncoding];
-    self.propertyBag = [NSData dataWithData:data];
-  }
-}
-
-+ (id)createObjectOfType:(NSString *)entityName Attributes:(NSMutableDictionary *)attributes{
++ (id)createObjectOfType:(NSString *)entityName attributes:(NSMutableDictionary *)attributes{
   
   NSManagedObjectContext *ctx = [[LGAppDelegate sharedAppDelegate] managedObjectContext];
   NSEntityDescription *sessionDesc = 
@@ -37,7 +19,6 @@
               inManagedObjectContext:ctx];
   id entity = [[NSManagedObject alloc] initWithEntity:sessionDesc insertIntoManagedObjectContext:ctx];
   [entity setValue:attributes forKeyPath:@"properties"];  
-  [entity resetPropertyBag];
   return entity;
 }
 

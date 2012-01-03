@@ -13,11 +13,9 @@
   NSDate *_parsedStart;
 }
 
-@property (nonatomic, retain) NSData *propertyBag;
 @property (nonatomic, retain) NSMutableDictionary *properties;
 
-+ (id)createObjectOfType:(NSString *)entityName Attributes:(NSMutableDictionary *)attributes;
++ (id)createObjectOfType:(NSString *)entityName attributes:(NSMutableDictionary *)attributes;
 - (NSDate *)dateProperty;
-- (void)resetPropertyBag;
 
 @end

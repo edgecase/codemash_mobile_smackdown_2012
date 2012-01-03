@@ -8,10 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SessionsViewController : UITableViewController{
-  NSArray *sessions;
-  Agenda *agenda;
+@interface SessionsViewController : UITableViewController<UISearchDisplayDelegate, UISearchBarDelegate, NSFetchedResultsControllerDelegate>{
+  Session *selectedSession;
 
+  NSFetchedResultsController *fetchController;
   IBOutlet UIActivityIndicatorView *spinner;
   
   // preloaded ux images.
@@ -21,6 +21,5 @@
 
 - (void)loadSessions;
 - (void)loadRemote:(NSString *)typeOfRemoteEntity;
-- (NSArray *)dataInSection:(NSInteger)section;
 
 @end

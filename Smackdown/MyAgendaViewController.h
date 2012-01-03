@@ -9,7 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface MyAgendaViewController : UITableViewController{
-  NSArray *myAgenda;
+  UIImageView *noAgendaView;
+  NSFetchedResultsController *fetchController;
 }
 
 @end
