@@ -3,7 +3,14 @@
 //  Smackdown
 //
 //  Created by Leon Gersing on 12/13/11.
-//  Copyright (c) 2011 fallenrogue.com. All rights reserved.
+//  Copyright (c) 2011 //  Copyright (c) 2012 Leon Gersing
+//
+//  Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+//
+//  The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+//
+//  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+//
 //
 
 #import "SessionsViewController.h"
@@ -51,6 +58,7 @@
   
   sortByDate = [NSSortDescriptor sortDescriptorWithKey:@"startAt" ascending:YES];
   [req setSortDescriptors:[NSArray arrayWithObject:sortByDate]];
+  [req setFetchBatchSize:10];
   sectionKey = @"timeSlot";
   cacheKey = @"SessionsList";
   ctx = [[LGAppDelegate sharedAppDelegate] managedObjectContext];
@@ -60,7 +68,7 @@
                                                         managedObjectContext:ctx
                                                           sectionNameKeyPath:sectionKey
                                                                    cacheName:cacheKey];
-  
+  fetchController.delegate = self;
   if(![fetchController performFetch:&fetchError]){
     NSLog(@"fetch error: %@", fetchError); exit(-1);
   }
@@ -77,7 +85,6 @@
 - (void)viewWillAppear:(BOOL)animated{
   [super viewWillAppear:animated];
   [self.tableView reloadData];
-  //[self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
 }
 
 - (void)viewDidAppear:(BOOL)animated{
@@ -106,7 +113,10 @@
   } else {
     sessionURL = [NSURL URLWithString:@"http://codemash.org/rest/precompiler.json"];
   }
-  NSURLRequest *req = [NSURLRequest requestWithURL:sessionURL cachePolicy:NSURLCacheStorageAllowed timeoutInterval:2];
+  NSURLRequest *req = 
+  [NSURLRequest requestWithURL:sessionURL 
+                                       cachePolicy:NSURLCacheStorageAllowed 
+                                   timeoutInterval:2];
   [NSURLConnection sendAsynchronousRequest:req 
                                      queue:[NSOperationQueue currentQueue]
                          completionHandler:
@@ -114,7 +124,7 @@
      if(err){
        [spinner stopAnimating];
        [[[UIAlertView alloc] initWithTitle:@"Oh noes!" 
-                                   message:[err description] 
+                                    message:[err description] 
                                   delegate:nil 
                          cancelButtonTitle:@"ok" 
                          otherButtonTitles:nil]
@@ -132,10 +142,6 @@
            obj.attending = NO;
          }
          dispatch_async(dispatch_get_main_queue(), ^{
-           if(!jsonErr){
-             [[LGAppDelegate sharedAppDelegate] saveContext:self];
-             [self.tableView reloadData];
-           }
            [spinner stopAnimating];
          });
        });
@@ -209,8 +215,45 @@
   return 55.0f;
 }
 
+- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
+  [self.tableView beginUpdates];
+}
+
+- (void)controller:(NSFetchedResultsController *)controller didChangeSection:(id <NSFetchedResultsSectionInfo>)sectionInfo atIndex:(NSUInteger)sectionIndex forChangeType:(NSFetchedResultsChangeType)type{
+  switch (type) {
+    case NSFetchedResultsChangeInsert:
+      [self.tableView insertSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationTop];
+      break;
+    case NSFetchedResultsChangeDelete:
+      [self.tableView deleteSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationBottom];
+      break;
+  }
+}
+
+- (void)controller:(NSFetchedResultsController *)controller
+   didChangeObject:(id)anObject
+       atIndexPath:(NSIndexPath *)indexPath
+     forChangeType:(NSFetchedResultsChangeType)type
+      newIndexPath:(NSIndexPath *)newIndexPath{
+  switch (type) {
+    case NSFetchedResultsChangeInsert:
+      [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath]
+                            withRowAnimation:UITableViewRowAnimationTop];
+      break;
+    case NSFetchedResultsChangeDelete:
+      [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
+                            withRowAnimation:UITableViewRowAnimationBottom];
+      break;
+      
+    case NSFetchedResultsChangeUpdate:
+      [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
+                            withRowAnimation:UITableViewRowAnimationFade];
+      break;
+  }
+}
+
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller{
-  [self.tableView reloadData];
+  [self.tableView endUpdates];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
